@@ -1,0 +1,2287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EnglishApex — Master English Like Never Before</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #D4A017;
+  --gold-light: #F0C040;
+  --gold-dim: #8a6510;
+  --bg: #0D0D0F;
+  --bg2: #14141A;
+  --bg3: #1C1C26;
+  --bg4: #242430;
+  --border: #2a2a38;
+  --text: #E8E6E0;
+  --text-dim: #9090a0;
+  --accent-blue: #4a9eff;
+  --accent-green: #3dd68c;
+  --accent-red: #ff6b6b;
+  --accent-purple: #a78bfa;
+  --sidebar-w: 260px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px}
+
+/* SIDEBAR */
+.sidebar{
+  position:fixed;left:0;top:0;width:var(--sidebar-w);height:100vh;
+  background:var(--bg2);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;z-index:100;
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+  overflow-y:auto;
+}
+.sidebar-logo{
+  padding:24px 20px 20px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+}
+.logo-icon{
+  width:40px;height:40px;background:linear-gradient(135deg,var(--gold),#b8860b);
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:900;color:#000;font-family:'Playfair Display',serif;
+  flex-shrink:0;
+}
+.logo-text{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1}
+.logo-sub{font-size:10px;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase}
+
+.nav-section{padding:12px 0}
+.nav-label{padding:6px 20px;font-size:10px;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;font-weight:600}
+.nav-item{
+  display:flex;align-items:center;gap:12px;padding:10px 20px;
+  cursor:pointer;transition:all .2s;border-left:3px solid transparent;
+  font-size:14px;color:var(--text-dim);font-weight:500;
+}
+.nav-item:hover{background:var(--bg3);color:var(--text);border-left-color:var(--gold-dim)}
+.nav-item.active{background:linear-gradient(90deg,rgba(212,160,23,.15),transparent);
+  color:var(--gold-light);border-left-color:var(--gold)}
+.nav-item .icon{font-size:18px;width:22px;text-align:center}
+
+.sidebar-footer{margin-top:auto;padding:16px 20px;border-top:1px solid var(--border)}
+.xp-bar-wrap{margin-bottom:8px}
+.xp-label{display:flex;justify-content:space-between;font-size:11px;color:var(--text-dim);margin-bottom:4px}
+.xp-bar{height:6px;background:var(--bg4);border-radius:3px;overflow:hidden}
+.xp-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:3px;transition:width .8s}
+.streak-badge{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-dim)}
+.streak-num{color:var(--gold);font-weight:700;font-size:15px}
+
+/* MAIN */
+.main{margin-left:var(--sidebar-w);min-height:100vh;transition:margin .3s}
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(13,13,15,.9);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 28px;
+}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.menu-btn{
+  display:none;background:none;border:none;color:var(--text);
+  font-size:22px;cursor:pointer;padding:4px;
+}
+.search-wrap{position:relative}
+.search-input{
+  background:var(--bg3);border:1px solid var(--border);color:var(--text);
+  padding:8px 12px 8px 36px;border-radius:8px;font-size:13px;
+  width:220px;outline:none;transition:all .2s;font-family:'DM Sans',sans-serif;
+}
+.search-input:focus{border-color:var(--gold-dim);width:260px}
+.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-dim);font-size:14px}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.streak-pill{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.3);
+  border-radius:20px;padding:5px 12px;font-size:13px;font-weight:600;color:var(--gold);
+}
+.xp-pill{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(74,158,255,.1);border:1px solid rgba(74,158,255,.3);
+  border-radius:20px;padding:5px 12px;font-size:13px;font-weight:600;color:var(--accent-blue);
+}
+.avatar{width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),#b8860b);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;color:#000;cursor:pointer;flex-shrink:0}
+
+/* CONTENT */
+.content{padding:28px;max-width:1100px}
+.section{display:none;animation:fadeSlide .4s ease}
+.section.active{display:block}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* HEADINGS */
+.page-title{
+  font-family:'Playfair Display',serif;font-size:32px;font-weight:900;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold),#c8960a);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:4px;line-height:1.2;
+}
+.page-sub{color:var(--text-dim);font-size:14px;margin-bottom:28px;line-height:1.5}
+
+/* CARDS */
+.card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:14px;
+  padding:20px;transition:all .25s;
+}
+.card:hover{border-color:var(--gold-dim);transform:translateY(-2px);box-shadow:0 8px 32px rgba(212,160,23,.08)}
+
+/* GRID */
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+
+/* HERO BANNER */
+.hero-banner{
+  background:linear-gradient(135deg,var(--bg3) 0%,rgba(212,160,23,.08) 50%,var(--bg3) 100%);
+  border:1px solid rgba(212,160,23,.25);border-radius:18px;
+  padding:32px;margin-bottom:28px;position:relative;overflow:hidden;
+}
+.hero-banner::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:250px;height:250px;
+  background:radial-gradient(circle,rgba(212,160,23,.12),transparent 70%);
+  border-radius:50%;
+}
+.hero-greeting{font-size:13px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.hero-name{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--text);margin-bottom:6px}
+.hero-sub{color:var(--text-dim);font-size:14px;line-height:1.6;max-width:500px}
+.hero-stats{display:flex;gap:24px;margin-top:20px}
+.hero-stat{text-align:center}
+.hero-stat-n{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--gold-light)}
+.hero-stat-l{font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px}
+
+/* QUICK ACCESS CARDS */
+.quick-card{
+  background:var(--bg3);border:1px solid var(--border);border-radius:12px;
+  padding:16px;cursor:pointer;transition:all .2s;text-align:center;
+}
+.quick-card:hover{border-color:var(--gold-dim);background:var(--bg4);transform:translateY(-3px)}
+.quick-icon{font-size:28px;margin-bottom:8px}
+.quick-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
+.quick-count{font-size:11px;color:var(--text-dim)}
+
+/* BADGES */
+.badge{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;
+}
+.badge-gold{background:rgba(212,160,23,.15);color:var(--gold);border:1px solid rgba(212,160,23,.3)}
+.badge-easy{background:rgba(61,214,140,.12);color:var(--accent-green);border:1px solid rgba(61,214,140,.25)}
+.badge-med{background:rgba(240,192,64,.12);color:var(--gold-light);border:1px solid rgba(240,192,64,.25)}
+.badge-hard{background:rgba(255,107,107,.12);color:var(--accent-red);border:1px solid rgba(255,107,107,.25)}
+.badge-blue{background:rgba(74,158,255,.1);color:var(--accent-blue);border:1px solid rgba(74,158,255,.25)}
+.badge-purple{background:rgba(167,139,250,.1);color:var(--accent-purple);border:1px solid rgba(167,139,250,.25)}
+
+/* DPP CARDS */
+.dpp-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:14px;
+  padding:20px;margin-bottom:16px;
+}
+.dpp-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:gap}
+.dpp-num{
+  font-family:'Playfair Display',serif;font-size:13px;color:var(--gold);
+  letter-spacing:1px;font-weight:700;
+}
+.dpp-title{font-size:17px;font-weight:700;color:var(--text);margin:4px 0 8px}
+.dpp-meta{font-size:12px;color:var(--text-dim)}
+.dpp-questions{margin-top:16px}
+.question-item{
+  background:var(--bg3);border:1px solid var(--border);border-radius:10px;
+  padding:14px 16px;margin-bottom:10px;
+}
+.q-num{font-size:11px;color:var(--gold);font-weight:700;margin-bottom:6px;letter-spacing:1px}
+.q-text{font-size:14px;color:var(--text);line-height:1.6;margin-bottom:10px}
+.q-options{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.q-opt{
+  background:var(--bg4);border:1px solid var(--border);border-radius:7px;
+  padding:8px 12px;font-size:13px;color:var(--text-dim);cursor:pointer;transition:all .2s;
+}
+.q-opt:hover{border-color:var(--gold-dim);color:var(--text)}
+.q-opt.correct{background:rgba(61,214,140,.1);border-color:var(--accent-green);color:var(--accent-green)}
+.q-opt.wrong{background:rgba(255,107,107,.08);border-color:var(--accent-red);color:var(--accent-red)}
+.answer-key{
+  margin-top:12px;padding:12px;background:rgba(61,214,140,.05);
+  border:1px solid rgba(61,214,140,.2);border-radius:8px;
+  font-size:13px;color:var(--accent-green);display:none;
+}
+.answer-key.visible{display:block}
+.toggle-btn{
+  background:none;border:1px solid var(--border);color:var(--text-dim);
+  padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;
+  transition:all .2s;font-family:'DM Sans',sans-serif;
+}
+.toggle-btn:hover{border-color:var(--gold-dim);color:var(--gold)}
+
+/* GRAMMAR */
+.grammar-topic{
+  background:var(--bg2);border:1px solid var(--border);border-radius:14px;
+  overflow:hidden;margin-bottom:16px;
+}
+.grammar-header{
+  padding:18px 20px;display:flex;align-items:center;justify-content:space-between;
+  cursor:pointer;transition:background .2s;
+}
+.grammar-header:hover{background:var(--bg3)}
+.grammar-title{font-size:16px;font-weight:700;color:var(--text)}
+.grammar-body{padding:0 20px 20px;display:none}
+.grammar-body.open{display:block;animation:fadeSlide .3s ease}
+
+.prof-note{
+  background:linear-gradient(135deg,rgba(212,160,23,.08),rgba(212,160,23,.03));
+  border:1px solid rgba(212,160,23,.2);border-radius:10px;
+  padding:16px;margin-bottom:16px;
+}
+.prof-note-label{
+  font-size:11px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;
+  font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px;
+}
+.prof-note p{font-size:14px;color:var(--text);line-height:1.7}
+
+.example-box{
+  background:var(--bg4);border-left:3px solid var(--gold);
+  padding:12px 16px;border-radius:0 8px 8px 0;margin:10px 0;
+  font-size:13px;color:var(--text-dim);line-height:1.7;
+}
+.example-box strong{color:var(--gold-light)}
+
+.structure-box{
+  background:rgba(74,158,255,.05);border:1px solid rgba(74,158,255,.2);
+  border-radius:10px;padding:14px;margin:12px 0;
+  font-size:14px;color:var(--accent-blue);font-family:monospace;
+}
+
+/* MINI QUIZ */
+.mini-quiz{margin-top:20px}
+.mini-quiz-title{font-size:14px;font-weight:700;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.quiz-score{font-size:13px;color:var(--text-dim);margin-top:10px}
+
+/* WRITING SECTIONS */
+.writing-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:14px;
+  padding:22px;margin-bottom:16px;
+}
+.writing-card h3{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--text);margin-bottom:10px}
+.writing-card p{font-size:14px;color:var(--text-dim);line-height:1.7}
+.writing-card .content-text{
+  font-size:14px;color:var(--text);line-height:1.8;
+  background:var(--bg3);padding:16px;border-radius:10px;margin-top:12px;
+  border-left:3px solid var(--gold-dim);
+}
+
+.tab-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.tab-btn{
+  padding:8px 18px;border-radius:20px;font-size:13px;font-weight:600;
+  background:var(--bg3);border:1px solid var(--border);color:var(--text-dim);
+  cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;
+}
+.tab-btn:hover{border-color:var(--gold-dim);color:var(--text)}
+.tab-btn.active{background:rgba(212,160,23,.15);border-color:var(--gold);color:var(--gold)}
+
+.tab-content{display:none}
+.tab-content.active{display:block;animation:fadeSlide .3s ease}
+
+/* VOCAB */
+.word-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:12px;
+  padding:18px;text-align:center;cursor:pointer;transition:all .2s;
+}
+.word-card:hover{border-color:var(--gold-dim);transform:translateY(-2px)}
+.word{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold-light);margin-bottom:4px}
+.word-type{font-size:11px;color:var(--accent-purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.word-meaning{font-size:13px;color:var(--text-dim);line-height:1.5}
+.word-example{font-size:12px;color:var(--text-dim);font-style:italic;margin-top:6px}
+
+.wotd{
+  background:linear-gradient(135deg,rgba(212,160,23,.12),rgba(212,160,23,.04));
+  border:1px solid rgba(212,160,23,.3);border-radius:16px;padding:24px;
+  margin-bottom:24px;text-align:center;
+}
+.wotd-label{font-size:11px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:12px}
+.wotd-word{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--gold-light);margin-bottom:6px}
+.wotd-phonetic{font-size:14px;color:var(--text-dim);margin-bottom:10px}
+.wotd-meaning{font-size:15px;color:var(--text);line-height:1.6;max-width:400px;margin:0 auto 12px}
+.wotd-example{font-size:13px;color:var(--text-dim);font-style:italic}
+
+/* EXAM */
+.timer{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.2);
+  border-radius:10px;padding:10px 16px;margin-bottom:20px;
+  font-size:16px;font-weight:700;color:var(--accent-red);
+}
+.score-card{
+  text-align:center;padding:32px;
+  background:linear-gradient(135deg,rgba(61,214,140,.08),rgba(212,160,23,.05));
+  border:1px solid rgba(61,214,140,.2);border-radius:16px;margin-bottom:20px;
+}
+.score-big{font-family:'Playfair Display',serif;font-size:56px;font-weight:900;color:var(--accent-green)}
+.score-label{font-size:14px;color:var(--text-dim);margin-top:4px}
+
+/* PROGRESS */
+.progress-ring{display:flex;justify-content:center;margin:20px 0}
+.badge-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:20px 0}
+.badge-item{
+  text-align:center;padding:16px 8px;border-radius:12px;
+  background:var(--bg3);border:1px solid var(--border);
+}
+.badge-item.earned{border-color:var(--gold-dim);background:rgba(212,160,23,.06)}
+.badge-emoji{font-size:28px;margin-bottom:6px}
+.badge-name{font-size:11px;color:var(--text-dim);font-weight:600}
+.badge-item.earned .badge-name{color:var(--gold)}
+
+/* LEADERBOARD */
+.lb-item{
+  display:flex;align-items:center;gap:14px;padding:12px 16px;
+  background:var(--bg3);border-radius:10px;margin-bottom:8px;border:1px solid var(--border);
+}
+.lb-rank{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;flex-shrink:0}
+.lb-rank.gold-r{background:rgba(212,160,23,.2);color:var(--gold)}
+.lb-rank.silver-r{background:rgba(160,160,180,.15);color:#c0c0d0}
+.lb-rank.bronze-r{background:rgba(180,120,80,.15);color:#c87941}
+.lb-rank.other-r{background:var(--bg4);color:var(--text-dim)}
+.lb-name{flex:1;font-size:14px;font-weight:600;color:var(--text)}
+.lb-xp{font-size:13px;color:var(--accent-blue);font-weight:700}
+
+/* ANNOUNCEMENT */
+.announcement{
+  background:rgba(74,158,255,.05);border:1px solid rgba(74,158,255,.15);
+  border-radius:10px;padding:14px 16px;margin-bottom:10px;
+  display:flex;gap:12px;align-items:flex-start;
+}
+.ann-dot{width:8px;height:8px;background:var(--accent-blue);border-radius:50%;margin-top:4px;flex-shrink:0}
+.ann-text{font-size:13px;color:var(--text-dim);line-height:1.5}
+.ann-text strong{color:var(--text)}
+.ann-date{font-size:11px;color:var(--text-dim);margin-top:4px}
+
+/* SECTION DIVIDER */
+.section-divider{
+  display:flex;align-items:center;gap:12px;margin:24px 0 16px;
+}
+.section-divider h2{
+  font-family:'Playfair Display',serif;font-size:20px;font-weight:700;
+  color:var(--text);white-space:nowrap;
+}
+.divider-line{flex:1;height:1px;background:var(--border)}
+
+/* SPOKEN ENGLISH */
+.convo-card{
+  background:var(--bg3);border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid var(--border);
+}
+.bubble{
+  max-width:75%;padding:10px 14px;border-radius:12px;margin-bottom:8px;font-size:13px;line-height:1.5;
+}
+.bubble.a{background:rgba(212,160,23,.12);border:1px solid rgba(212,160,23,.2);color:var(--text);margin-left:0}
+.bubble.b{background:rgba(74,158,255,.1);border:1px solid rgba(74,158,255,.2);color:var(--text);margin-left:auto}
+.bubble-label{font-size:10px;font-weight:700;letter-spacing:1px;margin-bottom:4px;text-transform:uppercase}
+.bubble.a .bubble-label{color:var(--gold)}
+.bubble.b .bubble-label{color:var(--accent-blue)}
+
+/* CERT */
+.cert{
+  background:linear-gradient(135deg,var(--bg3),rgba(212,160,23,.06));
+  border:2px solid rgba(212,160,23,.4);border-radius:20px;padding:40px;
+  text-align:center;position:relative;overflow:hidden;
+}
+.cert::before{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(212,160,23,.015) 20px,rgba(212,160,23,.015) 21px);
+}
+.cert-title{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold);letter-spacing:4px;text-transform:uppercase;margin-bottom:8px}
+.cert-main{font-family:'Playfair Display',serif;font-size:30px;font-weight:900;color:var(--text);margin:12px 0}
+.cert-name{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--gold-light);margin:8px 0}
+.cert-body{font-size:14px;color:var(--text-dim);line-height:1.7;max-width:400px;margin:0 auto}
+.cert-seal{font-size:40px;margin:16px 0}
+.cert-divider{width:60px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:16px auto}
+
+/* LETTER FORMAT */
+.letter-format{
+  background:var(--bg4);border:1px solid var(--border);border-radius:10px;
+  padding:20px;font-size:13px;line-height:2;color:var(--text);
+  font-family:'DM Sans',sans-serif;
+}
+.letter-format .lf-label{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:1px}
+
+/* MOBILE */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:90}
+
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}
+  .overlay.show{display:block}
+  .menu-btn{display:block}
+  .content{padding:16px}
+  .grid2,.grid3,.grid4{grid-template-columns:1fr}
+  .q-options{grid-template-columns:1fr}
+  .hero-stats{gap:16px}
+  .page-title{font-size:24px}
+  .badge-grid{grid-template-columns:repeat(3,1fr)}
+  .search-input{width:160px}
+  .search-input:focus{width:180px}
+}
+
+/* BTN */
+.btn{
+  padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;
+  cursor:pointer;border:none;transition:all .2s;font-family:'DM Sans',sans-serif;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#b8860b);color:#000}
+.btn-gold:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(212,160,23,.3)}
+.btn-outline{background:none;border:1px solid var(--border);color:var(--text-dim)}
+.btn-outline:hover{border-color:var(--gold-dim);color:var(--gold)}
+.btn-sm{padding:6px 14px;font-size:12px}
+
+/* PROGRESS BAR */
+.prog-bar{height:8px;background:var(--bg4);border-radius:4px;overflow:hidden;margin:6px 0}
+.prog-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--gold),var(--gold-light))}
+
+/* FLASHCARD */
+.flashcard{
+  perspective:1000px;cursor:pointer;
+}
+.flashcard-inner{
+  transition:transform .6s;transform-style:preserve-3d;
+  position:relative;height:160px;
+}
+.flashcard.flipped .flashcard-inner{transform:rotateY(180deg)}
+.fc-front,.fc-back{
+  position:absolute;inset:0;backface-visibility:hidden;
+  border-radius:12px;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:8px;padding:20px;text-align:center;
+}
+.fc-front{background:var(--bg3);border:1px solid var(--border)}
+.fc-back{background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.25);transform:rotateY(180deg)}
+.fc-word{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold-light)}
+.fc-hint{font-size:11px;color:var(--text-dim)}
+.fc-meaning{font-size:14px;color:var(--text);line-height:1.5}
+
+/* IDIOM TABLE */
+table.idiom-table{width:100%;border-collapse:collapse;font-size:13px}
+table.idiom-table th{background:var(--bg4);color:var(--gold);padding:10px 12px;text-align:left;border-bottom:1px solid var(--border);font-size:11px;letter-spacing:1px;text-transform:uppercase}
+table.idiom-table td{padding:10px 12px;border-bottom:1px solid rgba(42,42,56,.6);color:var(--text-dim);line-height:1.5;vertical-align:top}
+table.idiom-table td:first-child{color:var(--text);font-weight:600}
+table.idiom-table tr:hover td{background:rgba(255,255,255,.02)}
+
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-left:6px}
+.tag-formal{background:rgba(74,158,255,.12);color:var(--accent-blue)}
+.tag-informal{background:rgba(61,214,140,.1);color:var(--accent-green)}
+
+
+/* === MOBILE TOUCH FIXES === */
+* { -webkit-tap-highlight-color: rgba(212,160,23,0.15); }
+.quick-card, .nav-item, .grammar-header, .tab-btn, .q-opt, .toggle-btn, .btn, button {
+  cursor: pointer !important;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.quick-card {
+  background: none;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  width: 100%;
+}
+/* BOTTOM NAV */
+#bnav {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: #14141A;
+  border-top: 1px solid #2a2a38;
+  z-index: 999;
+  padding: 6px 0 env(safe-area-inset-bottom, 8px);
+}
+#bnav .bnav-inner {
+  display: flex;
+  justify-content: space-around;
+}
+#bnav button {
+  background: none;
+  border: none;
+  color: #9090a0;
+  font-size: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 6px;
+  font-family: sans-serif;
+  min-width: 50px;
+}
+#bnav button .bi { font-size: 20px; }
+@media(max-width:768px) {
+  #bnav { display: block; }
+  .content { padding-bottom: 75px !important; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon">E</div>
+    <div>
+      <div class="logo-text">EnglishApex</div>
+      <div class="logo-sub">Master English</div>
+    </div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Main</div>
+    <div class="nav-item active" onclick="showSection('home')"><span class="icon">🏠</span> Dashboard</div>
+    <div class="nav-item" onclick="showSection('dpp')"><span class="icon">📝</span> DPP Sheets</div>
+    <div class="nav-item" onclick="showSection('grammar')"><span class="icon">📖</span> Grammar</div>
+    <div class="nav-item" onclick="showSection('examples')"><span class="icon">📔</span> Example Sheets</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Writing Skills</div>
+    <div class="nav-item" onclick="showSection('story')"><span class="icon">📜</span> Story Writing</div>
+    <div class="nav-item" onclick="showSection('essay')"><span class="icon">📄</span> Essay Writing</div>
+    <div class="nav-item" onclick="showSection('poem')"><span class="icon">🎭</span> Poem Writing</div>
+    <div class="nav-item" onclick="showSection('letter')"><span class="icon">✉️</span> Letter Writing</div>
+    <div class="nav-item" onclick="showSection('email')"><span class="icon">📧</span> Email Writing</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Language Skills</div>
+    <div class="nav-item" onclick="showSection('spoken')"><span class="icon">🗣️</span> Spoken English</div>
+    <div class="nav-item" onclick="showSection('vocab')"><span class="icon">📚</span> Vocabulary Builder</div>
+    <div class="nav-item" onclick="showSection('exam')"><span class="icon">🧪</span> Test Yourself</div>
+    <div class="nav-item" onclick="showSection('progress')"><span class="icon">🏆</span> My Progress</div>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="xp-bar-wrap">
+      <div class="xp-label"><span>XP Progress</span><span id="sb-xp">0 / 500</span></div>
+      <div class="xp-bar"><div class="xp-fill" id="sb-xp-fill" style="width:0%"></div></div>
+    </div>
+    <div class="streak-badge">🔥 <span class="streak-num" id="sb-streak">0</span> day streak</div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input class="search-input" type="text" placeholder="Search topics..." oninput="handleSearch(this.value)">
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="streak-pill">🔥 <span id="top-streak">0</span> days</div>
+      <div class="xp-pill">⚡ <span id="top-xp">0</span> XP</div>
+      <div class="avatar" id="avatar-icon">S</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ====== HOME ====== -->
+    <div class="section active" id="sec-home">
+      <div class="hero-banner">
+        <div class="hero-greeting">✨ Welcome Back, Scholar</div>
+        <div class="hero-name" id="hero-name">Hello, Student!</div>
+        <div class="hero-sub">Your journey to English mastery continues today. Every lesson you complete brings you one step closer to fluency. Let's make today count!</div>
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="hero-stat-n" id="stat-lessons">0</div><div class="hero-stat-l">Lessons Done</div></div>
+          <div class="hero-stat"><div class="hero-stat-n" id="stat-streak">0</div><div class="hero-stat-l">Day Streak</div></div>
+          <div class="hero-stat"><div class="hero-stat-n" id="stat-xp">0</div><div class="hero-stat-l">Total XP</div></div>
+          <div class="hero-stat"><div class="hero-stat-n" id="stat-badge">🌱</div><div class="hero-stat-l">Badge Level</div></div>
+        </div>
+      </div>
+
+      <!-- NAME INPUT -->
+      <div class="card" style="margin-bottom:20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <span style="font-size:14px;color:var(--text-dim)">Your name:</span>
+        <input id="student-name" type="text" placeholder="Enter your name..." 
+          style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:8px;font-size:14px;outline:none;font-family:'DM Sans',sans-serif;flex:1;min-width:180px"
+          oninput="updateName(this.value)">
+        <button class="btn btn-gold btn-sm" onclick="saveName()">Save ✓</button>
+      </div>
+
+      <!-- LESSON OF THE DAY -->
+      <div class="section-divider"><h2>📌 Lesson of the Day</h2><div class="divider-line"></div></div>
+      <div class="card" style="margin-bottom:24px;border-color:rgba(212,160,23,.3)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+          <span class="badge badge-gold">Today's Lesson</span>
+          <span class="badge badge-easy">Grammar</span>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:20px;color:var(--text);margin-bottom:8px">The Present Perfect Tense — Why It Confuses Everyone</h3>
+        <div class="prof-note" style="margin-bottom:12px">
+          <div class="prof-note-label">👨‍🏫 Professor's Note</div>
+          <p>The Present Perfect is the "bridge" between past and present. It says: something happened in the past, and it still matters NOW. Think of it this way — "I <em>have eaten</em>" means you're full right now. "I <em>ate</em>" just tells a story. This tiny difference changes meaning completely!</p>
+        </div>
+        <div class="structure-box">Structure: Subject + have/has + Past Participle (V3)</div>
+        <div class="example-box">
+          <strong>✅ Correct:</strong> "I have completed my homework." (Still relevant now)<br>
+          <strong>✅ Correct:</strong> "She has visited Paris three times."<br>
+          <strong>❌ Common Mistake:</strong> "I have went to the market yesterday." → Use Simple Past with specific time!
+        </div>
+        <button class="btn btn-gold btn-sm" onclick="awardXP(50);showSection('grammar')">Study Full Lesson → +50 XP</button>
+      </div>
+
+      <!-- QUICK ACCESS -->
+      <div class="section-divider"><h2>⚡ Quick Access</h2><div class="divider-line"></div></div>
+      <div class="grid4" style="margin-bottom:24px">
+        <button class="quick-card" onclick="showSection('dpp')"><div class="quick-icon">📝</div><div class="quick-title">DPP Sheets</div><div class="quick-count">10 sheets ready</div></div>
+        <button class="quick-card" onclick="showSection('grammar')"><div class="quick-icon">📖</div><div class="quick-title">Grammar</div><div class="quick-count">10 topics</div></div>
+        <button class="quick-card" onclick="showSection('story')"><div class="quick-icon">📜</div><div class="quick-title">Story Writing</div><div class="quick-count">10 samples</div></div>
+        <button class="quick-card" onclick="showSection('essay')"><div class="quick-icon">📄</div><div class="quick-title">Essay Writing</div><div class="quick-count">15 essays</div></div>
+        <button class="quick-card" onclick="showSection('poem')"><div class="quick-icon">🎭</div><div class="quick-title">Poem Writing</div><div class="quick-count">15 samples</div></div>
+        <button class="quick-card" onclick="showSection('letter')"><div class="quick-icon">✉️</div><div class="quick-title">Letter Writing</div><div class="quick-count">20 samples</div></div>
+        <button class="quick-card" onclick="showSection('vocab')"><div class="quick-icon">📚</div><div class="quick-title">Vocabulary</div><div class="quick-count">200+ words</div></div>
+        <button class="quick-card" onclick="showSection('exam')"><div class="quick-icon">🧪</div><div class="quick-title">Take a Test</div><div class="quick-count">Mock exams</div></div>
+      </div>
+
+      <!-- ANNOUNCEMENTS -->
+      <div class="section-divider"><h2>📢 Announcements</h2><div class="divider-line"></div></div>
+      <div class="announcement"><div class="ann-dot"></div><div><div class="ann-text"><strong>New DPP Added:</strong> DPP 10 on Sentence Rearrangement is now live. Practice and earn +100 XP!</div><div class="ann-date">Today</div></div></div>
+      <div class="announcement"><div class="ann-dot"></div><div><div class="ann-text"><strong>Weekly Test:</strong> Grammar Mock Test (Tenses + Voice) is live every Sunday. Your score gets recorded!</div><div class="ann-date">Sunday, 10 AM</div></div></div>
+      <div class="announcement"><div class="ann-dot"></div><div><div class="ann-text"><strong>Tip of the Week:</strong> Read one English article daily. Even 10 minutes builds massive vocabulary over time.</div><div class="ann-date">Ongoing</div></div></div>
+    </div>
+
+    <!-- ====== DPP ====== -->
+    <div class="section" id="sec-dpp">
+      <div class="page-title">Daily Practice Problems</div>
+      <div class="page-sub">Sharpen your skills daily. Each DPP is crafted to target specific grammar & language concepts. Complete one a day for consistent improvement.</div>
+
+      <!-- DPP 01 -->
+      <div class="dpp-card">
+        <div class="dpp-header">
+          <div><div class="dpp-num">DPP 01</div><div class="dpp-title">Parts of Speech</div><div class="dpp-meta">10 Questions · Covers all 8 parts</div></div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="badge badge-easy">Easy</span><button class="toggle-btn" onclick="toggleAnswer('a01')">Show Answers</button></div>
+        </div>
+        <div class="dpp-questions">
+          <div class="question-item">
+            <div class="q-num">Q1</div>
+            <div class="q-text">Identify the part of speech of the underlined word: "She runs <u>quickly</u> to school."</div>
+            <div class="q-options">
+              <div class="q-opt" onclick="selectOpt(this,'b','a01q1')">A) Adjective</div>
+              <div class="q-opt" onclick="selectOpt(this,'a','a01q1')">B) Adverb ✓</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','a01q1')">C) Noun</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','a01q1')">D) Verb</div>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="q-num">Q2</div>
+            <div class="q-text">"The <u>beautiful</u> garden was full of flowers." — What part of speech is the underlined word?</div>
+            <div class="q-options">
+              <div class="q-opt" onclick="selectOpt(this,'a','a01q2')">A) Adjective ✓</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','a01q2')">B) Adverb</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','a01q2')">C) Noun</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','a01q2')">D) Preposition</div>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="q-num">Q3</div>
+            <div class="q-text">"Neither he nor she was present." — Identify the conjunction type.</div>
+            <div class="q-options">
+              <div class="q-opt" onclick="selectOpt(this,'b','a01q3')">A) Coordinating</div>
+              <div class="q-opt" onclick="selectOpt(this,'a','a01q3')">B) Correlative ✓</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','a01q3')">C) Subordinating</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','a01q3')">D) Compound</div>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="q-num">Q4</div>
+            <div class="q-text">"Hurrah! We won the match." — The underlined word 'Hurrah' is a/an ___.</div>
+            <div class="q-options">
+              <div class="q-opt" onclick="selectOpt(this,'b','a01q4')">A) Noun</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','a01q4')">B) Adjective</div>
+              <div class="q-opt" onclick="selectOpt(this,'a','a01q4')">C) Interjection ✓</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','a01q4')">D) Adverb</div>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="q-num">Q5</div>
+            <div class="q-text">"The book is <u>on</u> the table." — What part of speech is 'on'?</div>
+            <div class="q-options">
+              <div class="q-opt" onclick="selectOpt(this,'b','a01q5')">A) Conjunction</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','a01q5')">B) Adverb</div>
+              <div class="q-opt" onclick="selectOpt(this,'a','a01q5')">C) Preposition ✓</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','a01q5')">D) Article</div>
+            </div>
+          </div>
+        </div>
+        <div class="answer-key" id="a01">
+          ✅ Q1: B (Adverb — modifies the verb 'runs') | Q2: A (Adjective — describes 'garden') | Q3: B (Correlative — neither...nor) | Q4: C (Interjection — expresses emotion) | Q5: C (Preposition — shows position)
+        </div>
+      </div>
+
+      <!-- DPP 02 -->
+      <div class="dpp-card">
+        <div class="dpp-header">
+          <div><div class="dpp-num">DPP 02</div><div class="dpp-title">Tenses — All 12 Types</div><div class="dpp-meta">12 Questions · One per tense</div></div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="badge badge-med">Medium</span><button class="toggle-btn" onclick="toggleAnswer('a02')">Show Answers</button></div>
+        </div>
+        <div class="dpp-questions">
+          <div class="question-item">
+            <div class="q-num">Q1</div>
+            <div class="q-text">Choose the correct tense: "By the time he arrives, we ___ (finish) dinner."</div>
+            <div class="q-options">
+              <div class="q-opt" onclick="selectOpt(this,'b','d02q1')">A) will finish</div>
+              <div class="q-opt" onclick="selectOpt(this,'a','d02q1')">B) will have finished ✓</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','d02q1')">C) finished</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','d02q1')">D) have finished</div>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="q-num">Q2</div>
+            <div class="q-text">"She ___ (study) for three hours when the lights went out." — Fill in the blank.</div>
+            <div class="q-options">
+              <div class="q-opt" onclick="selectOpt(this,'b','d02q2')">A) was studying</div>
+              <div class="q-opt" onclick="selectOpt(this,'a','d02q2')">B) had been studying ✓</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','d02q2')">C) studied</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','d02q2')">D) has been studying</div>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="q-num">Q3</div>
+            <div class="q-text">Which sentence is in the Present Perfect Continuous tense?</div>
+            <div class="q-options">
+              <div class="q-opt" onclick="selectOpt(this,'b','d02q3')">A) She has written a letter.</div>
+              <div class="q-opt" onclick="selectOpt(this,'a','d02q3')">B) She has been writing since morning. ✓</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','d02q3')">C) She wrote a letter.</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','d02q3')">D) She is writing a letter.</div>
+            </div>
+          </div>
+        </div>
+        <div class="answer-key" id="a02">
+          ✅ Q1: B (Future Perfect — completed before a future event) | Q2: B (Past Perfect Continuous — ongoing action interrupted in past) | Q3: B (has been writing = Present Perfect Continuous)
+        </div>
+      </div>
+
+      <!-- DPP 05 - Direct/Indirect -->
+      <div class="dpp-card">
+        <div class="dpp-header">
+          <div><div class="dpp-num">DPP 05</div><div class="dpp-title">Direct & Indirect Speech</div><div class="dpp-meta">10 Questions · Narration rules</div></div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="badge badge-hard">Hard</span><button class="toggle-btn" onclick="toggleAnswer('a05')">Show Answers</button></div>
+        </div>
+        <div class="dpp-questions">
+          <div class="question-item">
+            <div class="q-num">Q1</div>
+            <div class="q-text">Change to Indirect Speech: He said, "I am very happy today."</div>
+            <div class="q-options">
+              <div class="q-opt" onclick="selectOpt(this,'a','d05q1')">A) He said that he was very happy that day. ✓</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','d05q1')">B) He said that he is very happy today.</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','d05q1')">C) He told that he was very happy today.</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','d05q1')">D) He said he is happy today.</div>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="q-num">Q2</div>
+            <div class="q-text">She asked, "Are you coming to the party?" — Change to indirect speech.</div>
+            <div class="q-options">
+              <div class="q-opt" onclick="selectOpt(this,'b','d05q2')">A) She asked that was I coming to the party.</div>
+              <div class="q-opt" onclick="selectOpt(this,'a','d05q2')">B) She asked if I was coming to the party. ✓</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','d05q2')">C) She asked whether am I coming.</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','d05q2')">D) She said if I was coming.</div>
+            </div>
+          </div>
+        </div>
+        <div class="answer-key" id="a05">
+          ✅ Q1: A (I→he, am→was, today→that day) | Q2: B (Questions use if/whether, not 'that'; inversion removed)
+        </div>
+      </div>
+
+      <!-- DPP 08 - Error Spotting -->
+      <div class="dpp-card">
+        <div class="dpp-header">
+          <div><div class="dpp-num">DPP 08</div><div class="dpp-title">Error Spotting</div><div class="dpp-meta">10 Questions · Find the error in each sentence</div></div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="badge badge-hard">Hard</span><button class="toggle-btn" onclick="toggleAnswer('a08')">Show Answers</button></div>
+        </div>
+        <div class="dpp-questions">
+          <div class="question-item">
+            <div class="q-num">Q1</div>
+            <div class="q-text">Find the error: "One of my friend (A) is going (B) to Delhi (C) tomorrow. (D) No Error"</div>
+            <div class="q-options">
+              <div class="q-opt" onclick="selectOpt(this,'a','d08q1')">A) One of my friend ✓</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','d08q1')">B) is going</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','d08q1')">C) to Delhi</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','d08q1')">D) No Error</div>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="q-num">Q2</div>
+            <div class="q-text">"She is more smarter (A) than (B) her brother (C) in mathematics. (D)"</div>
+            <div class="q-options">
+              <div class="q-opt" onclick="selectOpt(this,'a','d08q2')">A) more smarter ✓</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','d08q2')">B) than</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','d08q2')">C) her brother</div>
+              <div class="q-opt" onclick="selectOpt(this,'b','d08q2')">D) in mathematics</div>
+            </div>
+          </div>
+        </div>
+        <div class="answer-key" id="a08">
+          ✅ Q1: A — "friend" should be "friends" (One of my friends) | Q2: A — Double comparative error; use "smarter" OR "more smart", not both
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== GRAMMAR ====== -->
+    <div class="section" id="sec-grammar">
+      <div class="page-title">Grammar Masterclass</div>
+      <div class="page-sub">Learn every grammar concept deeply, with real examples and MIT-level explanations. Click any topic to expand it.</div>
+
+      <!-- TENSES -->
+      <div class="grammar-topic">
+        <div class="grammar-header" onclick="toggleGrammar(this)">
+          <div><div class="grammar-title">📅 The 12 Tenses — Complete Guide</div><div style="font-size:12px;color:var(--text-dim);margin-top:2px">Structure · Rules · 10 Examples each</div></div>
+          <span style="color:var(--gold);font-size:20px" class="chevron">+</span>
+        </div>
+        <div class="grammar-body">
+          <div class="prof-note">
+            <div class="prof-note-label">👨‍🏫 Professor's Note</div>
+            <p>Think of time as a line — past on the left, present in the middle, future on the right. English has 4 "aspects" — simple, continuous, perfect, and perfect continuous — applied to 3 time zones. That's 12 tenses. Master the pattern, not each individually!</p>
+          </div>
+          <div class="tab-bar">
+            <button class="tab-btn active" onclick="switchTab(this,'tense-simple')">Simple</button>
+            <button class="tab-btn" onclick="switchTab(this,'tense-cont')">Continuous</button>
+            <button class="tab-btn" onclick="switchTab(this,'tense-perf')">Perfect</button>
+            <button class="tab-btn" onclick="switchTab(this,'tense-pc')">Perfect Continuous</button>
+          </div>
+          <div class="tab-content active" id="tense-simple">
+            <table class="idiom-table">
+              <tr><th>Tense</th><th>Structure</th><th>Example</th></tr>
+              <tr><td>Simple Present</td><td>S + V1(s/es)</td><td>She reads every day.</td></tr>
+              <tr><td>Simple Past</td><td>S + V2</td><td>He went to school.</td></tr>
+              <tr><td>Simple Future</td><td>S + will + V1</td><td>They will arrive soon.</td></tr>
+            </table>
+            <div class="example-box">
+              <strong>Key Signal Words:</strong><br>
+              Present: always, usually, often, never, every day<br>
+              Past: yesterday, ago, last week, in 2020<br>
+              Future: tomorrow, next week, soon, in the future
+            </div>
+          </div>
+          <div class="tab-content" id="tense-cont">
+            <table class="idiom-table">
+              <tr><th>Tense</th><th>Structure</th><th>Example</th></tr>
+              <tr><td>Present Continuous</td><td>S + is/am/are + V-ing</td><td>She is reading now.</td></tr>
+              <tr><td>Past Continuous</td><td>S + was/were + V-ing</td><td>He was sleeping at 8 PM.</td></tr>
+              <tr><td>Future Continuous</td><td>S + will be + V-ing</td><td>They will be working tomorrow.</td></tr>
+            </table>
+            <div class="example-box">
+              <strong>💡 Use Continuous for:</strong> Actions happening right now, Actions in progress at a specific time, Two simultaneous actions (was cooking while she was reading)
+            </div>
+          </div>
+          <div class="tab-content" id="tense-perf">
+            <table class="idiom-table">
+              <tr><th>Tense</th><th>Structure</th><th>Example</th></tr>
+              <tr><td>Present Perfect</td><td>S + have/has + V3</td><td>I have eaten lunch.</td></tr>
+              <tr><td>Past Perfect</td><td>S + had + V3</td><td>She had left before I arrived.</td></tr>
+              <tr><td>Future Perfect</td><td>S + will have + V3</td><td>He will have finished by 5 PM.</td></tr>
+            </table>
+            <div class="example-box">
+              <strong>🔑 Perfect Tense = Completion + Relevance</strong><br>
+              Present Perfect: Recent past with present impact<br>
+              Past Perfect: "Older" past action before another past action<br>
+              Future Perfect: Completion before a future point
+            </div>
+          </div>
+          <div class="tab-content" id="tense-pc">
+            <table class="idiom-table">
+              <tr><th>Tense</th><th>Structure</th><th>Example</th></tr>
+              <tr><td>Present Perfect Cont.</td><td>S + have/has been + V-ing</td><td>I have been studying for 2 hours.</td></tr>
+              <tr><td>Past Perfect Cont.</td><td>S + had been + V-ing</td><td>She had been crying before he came.</td></tr>
+              <tr><td>Future Perfect Cont.</td><td>S + will have been + V-ing</td><td>By June, I will have been working here for 5 years.</td></tr>
+            </table>
+          </div>
+          <!-- Mini Quiz -->
+          <div class="mini-quiz">
+            <div class="mini-quiz-title">⚡ Quick Quiz — Test Yourself (Tenses)</div>
+            <div class="question-item">
+              <div class="q-num">Q1</div>
+              <div class="q-text">He ___ (sleep) when the phone rang.</div>
+              <div class="q-options">
+                <div class="q-opt" onclick="selectOpt(this,'b','tq1')">A) slept</div>
+                <div class="q-opt" onclick="selectOpt(this,'a','tq1')">B) was sleeping ✓</div>
+                <div class="q-opt" onclick="selectOpt(this,'b','tq1')">C) has slept</div>
+                <div class="q-opt" onclick="selectOpt(this,'b','tq1')">D) had slept</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTIVE PASSIVE -->
+      <div class="grammar-topic">
+        <div class="grammar-header" onclick="toggleGrammar(this)">
+          <div><div class="grammar-title">🔄 Active & Passive Voice</div><div style="font-size:12px;color:var(--text-dim);margin-top:2px">Rules · Conversion · All tenses</div></div>
+          <span style="color:var(--gold);font-size:20px" class="chevron">+</span>
+        </div>
+        <div class="grammar-body">
+          <div class="prof-note">
+            <div class="prof-note-label">👨‍🏫 Professor's Note</div>
+            <p>Active voice = "Who does what." Passive voice = "What is done to whom." Scientists love passive voice because the focus is on the experiment, not the person. Writers love active voice because it's strong and clear. Knowing both gives you superpowers in English!</p>
+          </div>
+          <div class="structure-box">
+            Active: Subject + Verb + Object<br>
+            Passive: Object + be (correct form) + Past Participle + by + Subject
+          </div>
+          <table class="idiom-table" style="margin:12px 0">
+            <tr><th>Tense</th><th>Active</th><th>Passive</th></tr>
+            <tr><td>Simple Present</td><td>She writes a letter.</td><td>A letter is written by her.</td></tr>
+            <tr><td>Simple Past</td><td>He built a house.</td><td>A house was built by him.</td></tr>
+            <tr><td>Present Perfect</td><td>They have solved the problem.</td><td>The problem has been solved by them.</td></tr>
+            <tr><td>Future Simple</td><td>She will paint the wall.</td><td>The wall will be painted by her.</td></tr>
+          </table>
+          <div class="example-box">
+            <strong>⚠️ Common Mistakes:</strong><br>
+            ❌ "The cake was eaten by I." → ✅ "The cake was eaten by me."<br>
+            ❌ "A letter has wrote by him." → ✅ "A letter has been written by him."
+          </div>
+        </div>
+      </div>
+
+      <!-- MODALS -->
+      <div class="grammar-topic">
+        <div class="grammar-header" onclick="toggleGrammar(this)">
+          <div><div class="grammar-title">🎯 Modal Verbs — Can, Could, May, Might, Must, Should, Would</div><div style="font-size:12px;color:var(--text-dim);margin-top:2px">Usage · Examples · Nuances</div></div>
+          <span style="color:var(--gold);font-size:20px" class="chevron">+</span>
+        </div>
+        <div class="grammar-body">
+          <div class="prof-note">
+            <div class="prof-note-label">👨‍🏫 Professor's Note</div>
+            <p>Modals are the "attitude adjusters" of English. They change how certain or polite you sound. "You must go" vs "You should go" vs "You could go" — all mean something different. Mastering modals means mastering nuance!</p>
+          </div>
+          <table class="idiom-table">
+            <tr><th>Modal</th><th>Main Use</th><th>Example</th></tr>
+            <tr><td>can</td><td>Ability / Permission (informal)</td><td>She can speak French fluently.</td></tr>
+            <tr><td>could</td><td>Past ability / Polite request</td><td>Could you help me, please?</td></tr>
+            <tr><td>may</td><td>Permission (formal) / Possibility</td><td>May I come in?</td></tr>
+            <tr><td>might</td><td>Weak possibility</td><td>It might rain tomorrow.</td></tr>
+            <tr><td>must</td><td>Strong obligation / Certainty</td><td>You must wear a seatbelt.</td></tr>
+            <tr><td>should</td><td>Advice / Expectation</td><td>You should eat healthy food.</td></tr>
+            <tr><td>would</td><td>Polite request / Hypothetical</td><td>Would you like some tea?</td></tr>
+            <tr><td>shall</td><td>Future (I/We) / Suggestion</td><td>Shall we begin the meeting?</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- CONDITIONALS -->
+      <div class="grammar-topic">
+        <div class="grammar-header" onclick="toggleGrammar(this)">
+          <div><div class="grammar-title">🔀 Conditionals — Type 0, 1, 2, 3</div><div style="font-size:12px;color:var(--text-dim);margin-top:2px">If clauses · Real & Unreal conditions</div></div>
+          <span style="color:var(--gold);font-size:20px" class="chevron">+</span>
+        </div>
+        <div class="grammar-body">
+          <table class="idiom-table">
+            <tr><th>Type</th><th>Usage</th><th>Structure</th><th>Example</th></tr>
+            <tr><td>Type 0</td><td>Always true facts</td><td>If + Present, Present</td><td>If you heat ice, it melts.</td></tr>
+            <tr><td>Type 1</td><td>Real future possibility</td><td>If + Present, will + V1</td><td>If it rains, I will stay home.</td></tr>
+            <tr><td>Type 2</td><td>Unreal present/future</td><td>If + Past, would + V1</td><td>If I were rich, I would travel the world.</td></tr>
+            <tr><td>Type 3</td><td>Unreal past (regret)</td><td>If + Past Perfect, would have + V3</td><td>If she had studied, she would have passed.</td></tr>
+          </table>
+          <div class="example-box">
+            <strong>🔑 Memory Trick:</strong><br>
+            Type 0 = Science facts | Type 1 = Maybe tomorrow | Type 2 = Dream/Wish | Type 3 = Regret about past
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== EXAMPLES ====== -->
+    <div class="section" id="sec-examples">
+      <div class="page-title">Example Sheets</div>
+      <div class="page-sub">Your ultimate reference library. Study these carefully — knowing common patterns by heart makes you a fluent speaker and writer.</div>
+      
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(this,'ex-idioms')">Idioms & Phrases</button>
+        <button class="tab-btn" onclick="switchTab(this,'ex-phrasal')">Phrasal Verbs</button>
+        <button class="tab-btn" onclick="switchTab(this,'ex-mistakes')">Common Mistakes</button>
+        <button class="tab-btn" onclick="switchTab(this,'ex-linking')">Linking Words</button>
+        <button class="tab-btn" onclick="switchTab(this,'ex-daily')">Daily Sentences</button>
+      </div>
+
+      <div class="tab-content active" id="ex-idioms">
+        <div class="card" style="margin-bottom:16px">
+          <div style="margin-bottom:12px;display:flex;justify-content:space-between;align-items:center">
+            <h3 style="font-size:16px;font-weight:700;color:var(--text)">50 Essential Idioms & Phrases</h3>
+            <span class="badge badge-gold">Reference Sheet</span>
+          </div>
+          <table class="idiom-table">
+            <tr><th>Idiom</th><th>Meaning</th><th>Example Sentence</th></tr>
+            <tr><td>Break the ice</td><td>Start a conversation in awkward situation</td><td>He told a joke to break the ice at the meeting.</td></tr>
+            <tr><td>Hit the nail on the head</td><td>Say exactly the right thing</td><td>You hit the nail on the head with that suggestion.</td></tr>
+            <tr><td>Bite the bullet</td><td>Endure pain or difficulty</td><td>Just bite the bullet and finish your homework.</td></tr>
+            <tr><td>Beat around the bush</td><td>Avoid the main topic</td><td>Stop beating around the bush and tell the truth.</td></tr>
+            <tr><td>Cost an arm and a leg</td><td>Very expensive</td><td>That phone costs an arm and a leg!</td></tr>
+            <tr><td>Once in a blue moon</td><td>Very rarely</td><td>She visits us once in a blue moon.</td></tr>
+            <tr><td>Under the weather</td><td>Feeling ill</td><td>I'm feeling under the weather today.</td></tr>
+            <tr><td>Spill the beans</td><td>Reveal secret information</td><td>Who spilled the beans about the surprise party?</td></tr>
+            <tr><td>Let the cat out of the bag</td><td>Reveal a secret accidentally</td><td>He let the cat out of the bag about the gift.</td></tr>
+            <tr><td>A blessing in disguise</td><td>Good thing that seemed bad at first</td><td>Losing that job was a blessing in disguise.</td></tr>
+            <tr><td>Burn bridges</td><td>Destroy relationships permanently</td><td>Don't burn bridges with your old colleagues.</td></tr>
+            <tr><td>Miss the boat</td><td>Miss an opportunity</td><td>He missed the boat on that investment.</td></tr>
+            <tr><td>Kill two birds with one stone</td><td>Solve two problems at once</td><td>I killed two birds with one stone by studying at work.</td></tr>
+            <tr><td>Bite off more than you can chew</td><td>Take on too much</td><td>She bit off more than she could chew with that project.</td></tr>
+            <tr><td>The ball is in your court</td><td>It's your decision/move</td><td>I've made my offer — the ball is in your court now.</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-content" id="ex-phrasal">
+        <div class="card">
+          <h3 style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:12px">40 Essential Phrasal Verbs</h3>
+          <table class="idiom-table">
+            <tr><th>Phrasal Verb</th><th>Meaning</th><th>Example</th></tr>
+            <tr><td>Give up</td><td>Stop trying / Quit</td><td>Never give up on your dreams.</td></tr>
+            <tr><td>Look up</td><td>Search for information</td><td>Look up the word in a dictionary.</td></tr>
+            <tr><td>Come across</td><td>Find by chance</td><td>I came across this book at a library sale.</td></tr>
+            <tr><td>Put off</td><td>Postpone</td><td>Don't put off your studies till tomorrow.</td></tr>
+            <tr><td>Turn down</td><td>Reject / Refuse</td><td>She turned down the job offer.</td></tr>
+            <tr><td>Bring up</td><td>Raise a topic / Raise children</td><td>He brought up an interesting point.</td></tr>
+            <tr><td>Break down</td><td>Stop working / Lose emotional control</td><td>The car broke down on the highway.</td></tr>
+            <tr><td>Get along</td><td>Have a good relationship</td><td>She gets along well with her colleagues.</td></tr>
+            <tr><td>Run out of</td><td>Have no more of something</td><td>We ran out of time during the exam.</td></tr>
+            <tr><td>Figure out</td><td>Understand / Solve</td><td>Can you figure out this math problem?</td></tr>
+            <tr><td>Take over</td><td>Gain control of</td><td>The new manager took over the department.</td></tr>
+            <tr><td>Call off</td><td>Cancel</td><td>The match was called off due to rain.</td></tr>
+            <tr><td>Carry out</td><td>Execute / Perform</td><td>Scientists carry out experiments carefully.</td></tr>
+            <tr><td>Point out</td><td>Highlight / Indicate</td><td>She pointed out the errors in my essay.</td></tr>
+            <tr><td>Set up</td><td>Establish / Arrange</td><td>He set up a new business last year.</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-content" id="ex-mistakes">
+        <div class="card">
+          <h3 style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:12px">🚨 Common English Mistakes (Indian Learners)</h3>
+          <table class="idiom-table">
+            <tr><th>❌ Incorrect</th><th>✅ Correct</th><th>Why?</th></tr>
+            <tr><td>I am having a pen.</td><td>I have a pen.</td><td>Stative verbs (have, know, like) don't use continuous tense.</td></tr>
+            <tr><td>She is more smarter.</td><td>She is smarter.</td><td>Never use 'more' with comparative adjective.</td></tr>
+            <tr><td>I gave exam yesterday.</td><td>I took/appeared in an exam.</td><td>'Give exam' is Indian English; Standard: take/sit for an exam.</td></tr>
+            <tr><td>My all friends are here.</td><td>All my friends are here.</td><td>'All' comes before possessives.</td></tr>
+            <tr><td>The news are shocking.</td><td>The news is shocking.</td><td>'News' is uncountable — always singular.</td></tr>
+            <tr><td>I am from Delhi only.</td><td>I am from Delhi.</td><td>'Only' used as emphasis is an Indian English pattern.</td></tr>
+            <tr><td>He advised me to not go.</td><td>He advised me not to go.</td><td>'Not' comes before 'to' in infinitives with negation.</td></tr>
+            <tr><td>She does not knows.</td><td>She does not know.</td><td>After do/does/did, always use base verb (V1).</td></tr>
+            <tr><td>They are cousin brothers.</td><td>They are cousins.</td><td>'Cousin' already implies the relationship — no need to add brother/sister.</td></tr>
+            <tr><td>I will revert you soon.</td><td>I will get back to you soon.</td><td>'Revert' means to return to a previous state, not to reply.</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-content" id="ex-linking">
+        <div class="card">
+          <h3 style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:12px">🔗 Linking Words & Transition Phrases</h3>
+          <div class="grid2">
+            <div>
+              <div style="font-size:12px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Adding Information</div>
+              <div class="example-box" style="margin:0">Furthermore · Moreover · In addition · Besides · Also · Not only...but also · Additionally · What is more</div>
+            </div>
+            <div>
+              <div style="font-size:12px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Showing Contrast</div>
+              <div class="example-box" style="margin:0">However · Nevertheless · On the other hand · In contrast · Despite · Although · Even though · Whereas</div>
+            </div>
+            <div>
+              <div style="font-size:12px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Giving Reasons</div>
+              <div class="example-box" style="margin:0">Because · Since · As · Due to · Owing to · For this reason · On account of · As a result of</div>
+            </div>
+            <div>
+              <div style="font-size:12px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Concluding</div>
+              <div class="example-box" style="margin:0">Therefore · Thus · Hence · Consequently · In conclusion · To sum up · Finally · In brief</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="ex-daily">
+        <div class="card">
+          <h3 style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:12px">💬 100 Daily Use English Sentences</h3>
+          <div class="grid2">
+            <div>
+              <div style="font-size:12px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-bottom:8px">Greetings & Introductions</div>
+              <div class="example-box" style="margin:0;font-size:13px;line-height:2">
+                How are you getting along?<br>
+                Long time no see!<br>
+                It's a pleasure to meet you.<br>
+                I don't think we've been introduced.<br>
+                What do you do for a living?<br>
+                I'm originally from Tripura.
+              </div>
+            </div>
+            <div>
+              <div style="font-size:12px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-bottom:8px">Polite Requests</div>
+              <div class="example-box" style="margin:0;font-size:13px;line-height:2">
+                Could you possibly help me with this?<br>
+                Would you mind lowering your voice?<br>
+                I was wondering if you could...<br>
+                I'd be grateful if you could...<br>
+                Do you think you could...?<br>
+                If it's not too much trouble...
+              </div>
+            </div>
+            <div style="margin-top:12px">
+              <div style="font-size:12px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-bottom:8px">Expressing Opinions</div>
+              <div class="example-box" style="margin:0;font-size:13px;line-height:2">
+                In my opinion / From my perspective...<br>
+                I strongly believe that...<br>
+                As far as I'm concerned...<br>
+                It seems to me that...<br>
+                I tend to think that...<br>
+                I couldn't agree more.
+              </div>
+            </div>
+            <div style="margin-top:12px">
+              <div style="font-size:12px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-bottom:8px">Disagreeing Politely</div>
+              <div class="example-box" style="margin:0;font-size:13px;line-height:2">
+                I see your point, but...<br>
+                That's an interesting view, however...<br>
+                I'm afraid I disagree because...<br>
+                With all due respect...<br>
+                I'm not entirely convinced that...<br>
+                Don't you think that...?
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== STORY WRITING ====== -->
+    <div class="section" id="sec-story">
+      <div class="page-title">Story Writing</div>
+      <div class="page-sub">Learn the art of storytelling. From structure to sample stories — become the writer you were meant to be.</div>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(this,'story-guide')">Guide & Structure</button>
+        <button class="tab-btn" onclick="switchTab(this,'story-samples')">Sample Stories</button>
+        <button class="tab-btn" onclick="switchTab(this,'story-prompts')">Practice Prompts</button>
+        <button class="tab-btn" onclick="switchTab(this,'story-checklist')">Checklist</button>
+      </div>
+
+      <div class="tab-content active" id="story-guide">
+        <div class="writing-card">
+          <h3>📖 What is Story Writing?</h3>
+          <div class="prof-note">
+            <div class="prof-note-label">👨‍🏫 Professor's Note</div>
+            <p>A story is not just a sequence of events — it is a transformation. Something must change. A character must grow, a problem must be solved, or a lesson must be learned. The best stories make readers FEEL something. That is your goal.</p>
+          </div>
+          <div class="structure-box">
+            THE 5 ELEMENTS: Setting → Characters → Conflict → Rising Action → Resolution
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="card"><div style="font-size:20px;margin-bottom:8px">🌍</div><div style="font-weight:700;color:var(--text);margin-bottom:6px">Setting</div><p style="font-size:13px;color:var(--text-dim);line-height:1.6">Where and when does the story happen? Paint a picture with words. "The old clock tower stood alone at the edge of the misty village..."</p></div>
+          <div class="card"><div style="font-size:20px;margin-bottom:8px">👥</div><div style="font-weight:700;color:var(--text);margin-bottom:6px">Characters</div><p style="font-size:13px;color:var(--text-dim);line-height:1.6">Who is the story about? Give them a name, a goal, a flaw. Great characters are relatable — readers must care about them.</p></div>
+          <div class="card"><div style="font-size:20px;margin-bottom:8px">⚡</div><div style="font-weight:700;color:var(--text);margin-bottom:6px">Conflict</div><p style="font-size:13px;color:var(--text-dim);line-height:1.6">What is the problem? No conflict = no story. Man vs. Man, Man vs. Nature, Man vs. Self, Man vs. Society.</p></div>
+          <div class="card"><div style="font-size:20px;margin-bottom:8px">🌅</div><div style="font-weight:700;color:var(--text);margin-bottom:6px">Resolution</div><p style="font-size:13px;color:var(--text-dim);line-height:1.6">How does it end? Does the character solve the problem? What lesson did they (and the reader) learn?</p></div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="story-samples">
+        <div class="writing-card">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <span class="badge badge-gold">Sample Story 1</span>
+            <span class="badge badge-easy">200 words</span>
+          </div>
+          <h3>The Broken Compass</h3>
+          <div class="content-text">
+            Arjun had always dreamed of climbing the hills beyond his village. One summer morning, armed with his grandfather's old compass, he set off alone.
+
+            Halfway up the rocky trail, he realized the compass needle was spinning uselessly — broken. Panic rose in his chest like smoke. The mist was thickening, and every path looked the same.
+
+            Then he remembered something his grandfather once said: "When all tools fail, trust what you know." He looked up. The sun was still visible through the mist, hanging low in the west. He could use it to navigate.
+
+            Step by careful step, he made his way back down, guided not by instruments, but by knowledge quietly stored in his mind.
+
+            That evening, as he sat at his grandfather's feet, the old man smiled at the broken compass in Arjun's hands. "I was wondering when you'd discover that," he said softly.
+
+            <em><strong>Moral:</strong> True knowledge is the compass that never breaks.</em>
+          </div>
+          <div style="margin-top:12px">
+            <div style="font-size:12px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">📝 Story Analysis</div>
+            <div class="example-box" style="font-size:12px">
+              <strong>Setting:</strong> Village hills, summer morning, misty trail<br>
+              <strong>Character:</strong> Arjun — curious, brave, resourceful<br>
+              <strong>Conflict:</strong> Lost without working compass (Man vs. Nature)<br>
+              <strong>Resolution:</strong> Uses natural knowledge (sun's position)<br>
+              <strong>Moral:</strong> Clear and memorable — woven into the story
+            </div>
+          </div>
+        </div>
+        <div class="writing-card">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <span class="badge badge-gold">Sample Story 2</span>
+            <span class="badge badge-med">300 words</span>
+          </div>
+          <h3>The Last Bench Student</h3>
+          <div class="content-text">
+            Meera always sat at the back of the class — not because she was lazy, but because from there, she could see everyone. She watched Rohan always get the first answer right. She watched Priya's confident handwriting curl across the board. And she wondered: what did they have that she didn't?
+
+            One day, their English teacher announced a story-writing competition. "The best story wins a chance to read it at the Annual Day," she said.
+
+            Meera went home that evening and wrote. Not to win. Not to impress. She wrote because she had always had stories inside her — about her grandmother's village, about the mango tree outside her window, about the silence after monsoon rain.
+
+            The results came a week later. The teacher read out the winner's name quietly, almost with reverence: "Meera."
+
+            The class turned. Rohan smiled — genuinely. Priya began to clap first.
+
+            Standing at the podium on Annual Day, Meera looked out at the hall full of faces. For the first time, she didn't want to be at the back.
+
+            <em><strong>Moral:</strong> Talent doesn't announce itself loudly. Sometimes it waits quietly at the last bench.</em>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="story-prompts">
+        <div class="card" style="margin-bottom:16px">
+          <h3 style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:14px">✍️ 20 Practice Story Prompts</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div class="card" style="padding:12px"><div class="q-num" style="margin-bottom:4px">Prompt 1</div><div style="font-size:13px;color:var(--text)">Write a story that begins with: "The letter arrived 20 years too late."</div><div style="font-size:11px;color:var(--text-dim);margin-top:4px">Hint: Use flashback technique</div></div>
+            <div class="card" style="padding:12px"><div class="q-num" style="margin-bottom:4px">Prompt 2</div><div style="font-size:13px;color:var(--text)">A child finds a strange seed that grows into something unexpected.</div><div style="font-size:11px;color:var(--text-dim);margin-top:4px">Hint: Fantasy/Nature theme</div></div>
+            <div class="card" style="padding:12px"><div class="q-num" style="margin-bottom:4px">Prompt 3</div><div style="font-size:13px;color:var(--text)">Two strangers stranded at a railway station discover they have the same destination.</div><div style="font-size:11px;color:var(--text-dim);margin-top:4px">Hint: Focus on dialogue</div></div>
+            <div class="card" style="padding:12px"><div class="q-num" style="margin-bottom:4px">Prompt 4</div><div style="font-size:13px;color:var(--text)">The last tree in a city becomes the center of a community's fight.</div><div style="font-size:11px;color:var(--text-dim);margin-top:4px">Hint: Environmental theme</div></div>
+            <div class="card" style="padding:12px"><div class="q-num" style="margin-bottom:4px">Prompt 5</div><div style="font-size:13px;color:var(--text)">A student accidentally receives the answer sheet of tomorrow's exam.</div><div style="font-size:11px;color:var(--text-dim);margin-top:4px">Hint: Moral dilemma story</div></div>
+            <div class="card" style="padding:12px"><div class="q-num" style="margin-bottom:4px">Prompt 6</div><div style="font-size:13px;color:var(--text)">Write about a day when silence saved a life.</div><div style="font-size:11px;color:var(--text-dim);margin-top:4px">Hint: Suspense/thriller</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="story-checklist">
+        <div class="writing-card">
+          <h3>✅ Story Writing Checklist</h3>
+          <p style="color:var(--text-dim);font-size:13px;margin-bottom:16px">Before submitting your story, verify every point below.</p>
+          <div id="checklist-items"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== ESSAY ====== -->
+    <div class="section" id="sec-essay">
+      <div class="page-title">Essay Writing</div>
+      <div class="page-sub">Master the art of structured, persuasive writing. From climate change to technology — learn to write essays that impress examiners.</div>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(this,'essay-types')">Types & Structure</button>
+        <button class="tab-btn" onclick="switchTab(this,'essay-samples')">Sample Essays</button>
+        <button class="tab-btn" onclick="switchTab(this,'essay-vocab')">Vocabulary Booster</button>
+        <button class="tab-btn" onclick="switchTab(this,'essay-prompts')">Practice Topics</button>
+      </div>
+
+      <div class="tab-content active" id="essay-types">
+        <div class="grid2" style="margin-bottom:16px">
+          <div class="card"><div style="font-size:22px;margin-bottom:6px">📖</div><div style="font-weight:700;color:var(--gold-light);margin-bottom:4px">Descriptive Essay</div><p style="font-size:13px;color:var(--text-dim);line-height:1.5">Paint a picture with words. Describe a person, place, or event in rich sensory detail. Focus on what you see, hear, smell, and feel.</p></div>
+          <div class="card"><div style="font-size:22px;margin-bottom:6px">💬</div><div style="font-weight:700;color:var(--gold-light);margin-bottom:4px">Argumentative Essay</div><p style="font-size:13px;color:var(--text-dim);line-height:1.5">Take a clear stance on an issue and defend it with logic, facts, and evidence. Acknowledge the other side before refuting it.</p></div>
+          <div class="card"><div style="font-size:22px;margin-bottom:6px">📚</div><div style="font-weight:700;color:var(--gold-light);margin-bottom:4px">Expository Essay</div><p style="font-size:13px;color:var(--text-dim);line-height:1.5">Explain a concept clearly and objectively. No personal opinion — just information, analysis, and clarification.</p></div>
+          <div class="card"><div style="font-size:22px;margin-bottom:6px">🎯</div><div style="font-weight:700;color:var(--gold-light);margin-bottom:4px">Persuasive Essay</div><p style="font-size:13px;color:var(--text-dim);line-height:1.5">Convince the reader to agree with your view or take an action. Uses emotional appeal, logic, and credible examples.</p></div>
+        </div>
+        <div class="writing-card">
+          <h3>📐 Universal Essay Structure</h3>
+          <div class="structure-box">
+            INTRODUCTION → Hook + Background + Thesis Statement<br>
+            BODY PARAGRAPH 1 → Main Point + Evidence + Explanation<br>
+            BODY PARAGRAPH 2 → Second Point + Evidence + Explanation<br>
+            BODY PARAGRAPH 3 → Third Point / Counter-argument + Refutation<br>
+            CONCLUSION → Summary + Restate Thesis + Closing Thought
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="essay-samples">
+        <div class="writing-card">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+            <span class="badge badge-gold">Sample Essay</span>
+            <span class="badge badge-purple">Argumentative</span>
+            <span class="badge badge-med">250 words</span>
+          </div>
+          <h3>Social Media: Boon or Bane for Students?</h3>
+          <div class="content-text">
+            <strong>Introduction:</strong><br>
+            In the age of digital connectivity, social media platforms such as Instagram, YouTube, and Twitter have become inseparable from the lives of students worldwide. While some educators view these platforms as dangerous distractions, a closer examination reveals that social media, when used wisely, can be a powerful educational tool.
+
+            <br><br><strong>Body — For:</strong><br>
+            Firstly, social media democratizes learning. Students from remote areas like Tripura can access lectures from MIT professors, participate in global discussions, and stay updated with scientific breakthroughs — all for free. Moreover, collaborative learning through group platforms fosters teamwork and communication skills that traditional classrooms often overlook.
+
+            <br><br><strong>Body — Against:</strong><br>
+            However, critics rightly point out that social media is engineered for addiction. The average student spends over three hours daily scrolling, which directly reduces study time. Furthermore, the culture of comparison fueled by curated highlight reels leads to anxiety and reduced self-esteem among young users.
+
+            <br><br><strong>Conclusion:</strong><br>
+            The question is not whether social media is good or bad — it is whether we are equipped to use it responsibly. With proper digital literacy education and self-discipline, students can harness its immense power while avoiding its pitfalls. Like fire, social media is a dangerous servant but a terrible master.
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="essay-vocab">
+        <div class="card">
+          <h3 style="font-size:16px;font-weight:700;margin-bottom:14px">🔤 Topic-wise Smart Vocabulary</h3>
+          <div class="grid2">
+            <div>
+              <div style="font-size:12px;color:var(--gold);font-weight:700;letter-spacing:1px;margin-bottom:8px">🌍 ENVIRONMENT</div>
+              <div class="example-box" style="margin:0;font-size:13px;line-height:2">Biodiversity · Ecosystem · Deforestation · Carbon footprint · Renewable energy · Sustainable development · Climate change · Greenhouse effect · Conservation · Environmental degradation</div>
+            </div>
+            <div>
+              <div style="font-size:12px;color:var(--gold);font-weight:700;letter-spacing:1px;margin-bottom:8px">💻 TECHNOLOGY</div>
+              <div class="example-box" style="margin:0;font-size:13px;line-height:2">Artificial intelligence · Automation · Digital divide · Cybersecurity · Innovation · Disruption · Algorithm · Virtual reality · Data privacy · Technological advancement</div>
+            </div>
+            <div>
+              <div style="font-size:12px;color:var(--gold);font-weight:700;letter-spacing:1px;margin-bottom:8px">🎓 EDUCATION</div>
+              <div class="example-box" style="margin:0;font-size:13px;line-height:2">Pedagogy · Curriculum · Holistic development · Critical thinking · Rote learning · Experiential learning · Academic excellence · Literacy rate · Empowerment · Inclusive education</div>
+            </div>
+            <div>
+              <div style="font-size:12px;color:var(--gold);font-weight:700;letter-spacing:1px;margin-bottom:8px">👥 SOCIETY</div>
+              <div class="example-box" style="margin:0;font-size:13px;line-height:2">Inequality · Discrimination · Empowerment · Social cohesion · Cultural diversity · Urbanization · Gender equality · Human rights · Marginalized communities · Social justice</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="essay-prompts">
+        <div class="card">
+          <h3 style="font-size:16px;font-weight:700;margin-bottom:14px">📝 25 Practice Essay Topics</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div class="card" style="padding:12px"><span class="badge badge-blue" style="margin-bottom:6px">Environment</span><div style="font-size:13px;color:var(--text)">Climate Change: The Greatest Challenge of Our Generation</div></div>
+            <div class="card" style="padding:12px"><span class="badge badge-purple" style="margin-bottom:6px">Technology</span><div style="font-size:13px;color:var(--text)">Artificial Intelligence: Friend or Threat to Humanity?</div></div>
+            <div class="card" style="padding:12px"><span class="badge badge-easy" style="margin-bottom:6px">Society</span><div style="font-size:13px;color:var(--text)">Should mobile phones be banned in schools?</div></div>
+            <div class="card" style="padding:12px"><span class="badge badge-gold" style="margin-bottom:6px">Education</span><div style="font-size:13px;color:var(--text)">Online Learning vs. Classroom Learning: A Comparative Analysis</div></div>
+            <div class="card" style="padding:12px"><span class="badge badge-med" style="margin-bottom:6px">Youth</span><div style="font-size:13px;color:var(--text)">The Role of Youth in Nation Building</div></div>
+            <div class="card" style="padding:12px"><span class="badge badge-hard" style="margin-bottom:6px">Health</span><div style="font-size:13px;color:var(--text)">Mental Health: The Silent Crisis Among Students</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== POEM ====== -->
+    <div class="section" id="sec-poem">
+      <div class="page-title">Poem Writing</div>
+      <div class="page-sub">Poetry is feelings translated into words. Learn every form, master every device, and express yourself like never before.</div>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(this,'poem-types')">Types of Poems</button>
+        <button class="tab-btn" onclick="switchTab(this,'poem-samples')">Sample Poems</button>
+        <button class="tab-btn" onclick="switchTab(this,'poem-devices')">Poetic Devices</button>
+        <button class="tab-btn" onclick="switchTab(this,'poem-prompts')">Writing Prompts</button>
+      </div>
+
+      <div class="tab-content active" id="poem-types">
+        <div class="grid2">
+          <div class="card"><div style="font-size:22px;margin-bottom:6px">🌸</div><div style="font-weight:700;color:var(--gold-light);margin-bottom:4px">Haiku</div><div class="structure-box" style="margin:8px 0;font-size:12px">Line 1: 5 syllables · Line 2: 7 syllables · Line 3: 5 syllables</div><div class="example-box" style="margin:0;font-size:13px;font-style:italic">An old silent pond...<br>A frog jumps into the pond.<br>Splash! Silence again.</div></div>
+          <div class="card"><div style="font-size:22px;margin-bottom:6px">🎵</div><div style="font-weight:700;color:var(--gold-light);margin-bottom:4px">Rhyming (AABB / ABAB)</div><div class="structure-box" style="margin:8px 0;font-size:12px">ABAB: alternate rhyme | AABB: couplet rhyme | ABCB: ballad</div><div class="example-box" style="margin:0;font-size:13px;font-style:italic">The sun sets in the golden sky, (A)<br>The birds return to their nest. (B)<br>The day whispers a soft goodbye, (A)<br>And the world goes off to rest. (B)</div></div>
+          <div class="card"><div style="font-size:22px;margin-bottom:6px">🌊</div><div style="font-weight:700;color:var(--gold-light);margin-bottom:4px">Free Verse</div><div class="structure-box" style="margin:8px 0;font-size:12px">No fixed rhyme or meter — freedom of expression</div><p style="font-size:13px;color:var(--text-dim);line-height:1.6">The most modern form. Focus on imagery, emotion, and rhythm without strict rules. Used by Pablo Neruda, Walt Whitman, Rabindranath Tagore.</p></div>
+          <div class="card"><div style="font-size:22px;margin-bottom:6px">🔤</div><div style="font-weight:700;color:var(--gold-light);margin-bottom:4px">Acrostic Poem</div><div class="structure-box" style="margin:8px 0;font-size:12px">First letter of each line spells a word</div><div class="example-box" style="margin:0;font-size:13px;font-style:italic"><strong>B</strong>right as morning light,<br><strong>O</strong>pening like a flower,<br><strong>O</strong>nly showing its true self slowly,<br><strong>K</strong>nowledge — never-ending.</div></div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="poem-samples">
+        <div class="writing-card">
+          <div style="margin-bottom:8px"><span class="badge badge-gold">Sample Poem 1</span> <span class="badge badge-purple">Free Verse</span></div>
+          <h3>The River Remembers</h3>
+          <div class="content-text" style="font-style:italic;line-height:2.2">
+            I have carried fishing boats and broken leaves,<br>
+            the prayers of women at dawn<br>
+            and the secret grief of a boy<br>
+            who once threw his father's letter into me.<br>
+            <br>
+            I remember everything.<br>
+            That is the burden and the gift of water —<br>
+            to hold what others let go,<br>
+            to carry it gently,<br>
+            to the sea.
+          </div>
+          <div style="margin-top:12px">
+            <div class="example-box" style="font-size:12px">
+              <strong>Devices used:</strong> Personification (river remembers, carries prayers) · Imagery (fishing boats, women at dawn) · Metaphor (letter as grief) · Enjambment (lines flow into each other) · Symbolism (sea = final destination/death)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="poem-devices">
+        <div class="card">
+          <h3 style="font-size:16px;font-weight:700;margin-bottom:14px">🎭 Poetic Devices — Complete List</h3>
+          <table class="idiom-table">
+            <tr><th>Device</th><th>Definition</th><th>Example</th></tr>
+            <tr><td>Simile</td><td>Comparison using 'like' or 'as'</td><td>"She is as brave as a lion."</td></tr>
+            <tr><td>Metaphor</td><td>Direct comparison (no like/as)</td><td>"Life is a journey."</td></tr>
+            <tr><td>Personification</td><td>Giving human qualities to non-human</td><td>"The wind whispered through the trees."</td></tr>
+            <tr><td>Alliteration</td><td>Repetition of initial consonant sound</td><td>"Peter picked a peck of pickled peppers."</td></tr>
+            <tr><td>Assonance</td><td>Repetition of vowel sounds</td><td>"The rain in Spain stays mainly in the plain."</td></tr>
+            <tr><td>Onomatopoeia</td><td>Word imitates a sound</td><td>"The bees buzzed and the frogs croaked."</td></tr>
+            <tr><td>Hyperbole</td><td>Extreme exaggeration</td><td>"I've told you a million times!"</td></tr>
+            <tr><td>Oxymoron</td><td>Contradictory terms together</td><td>"Deafening silence" · "Living death"</td></tr>
+            <tr><td>Symbolism</td><td>Object represents deeper meaning</td><td>Dove = peace | Storm = trouble</td></tr>
+            <tr><td>Imagery</td><td>Vivid sensory description</td><td>"The golden wheat swayed in the warm breeze."</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-content" id="poem-prompts">
+        <div class="card">
+          <h3 style="font-size:16px;font-weight:700;margin-bottom:14px">✍️ 20 Poem Writing Prompts</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div class="card" style="padding:12px"><div class="q-num" style="margin-bottom:4px">Prompt 1</div><div style="font-size:13px;color:var(--text)">Write a haiku about your city at monsoon time.</div></div>
+            <div class="card" style="padding:12px"><div class="q-num" style="margin-bottom:4px">Prompt 2</div><div style="font-size:13px;color:var(--text)">Write a free verse poem from the perspective of a tree being cut down.</div></div>
+            <div class="card" style="padding:12px"><div class="q-num" style="margin-bottom:4px">Prompt 3</div><div style="font-size:13px;color:var(--text)">Write an acrostic poem using your name.</div></div>
+            <div class="card" style="padding:12px"><div class="q-num" style="margin-bottom:4px">Prompt 4</div><div style="font-size:13px;color:var(--text)">Write a rhyming poem about what you want to become.</div></div>
+            <div class="card" style="padding:12px"><div class="q-num" style="margin-bottom:4px">Prompt 5</div><div style="font-size:13px;color:var(--text)">Personify time — what would Time say if it could speak?</div></div>
+            <div class="card" style="padding:12px"><div class="q-num" style="margin-bottom:4px">Prompt 6</div><div style="font-size:13px;color:var(--text)">Write about silence — what does it look like, smell like, feel like?</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== LETTER ====== -->
+    <div class="section" id="sec-letter">
+      <div class="page-title">Letter Writing</div>
+      <div class="page-sub">From formal applications to heartfelt personal letters — master every format used in exams and real life.</div>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(this,'letter-formal')">Formal Letters</button>
+        <button class="tab-btn" onclick="switchTab(this,'letter-informal')">Informal Letters</button>
+        <button class="tab-btn" onclick="switchTab(this,'letter-tips')">Tips & Phrases</button>
+      </div>
+
+      <div class="tab-content active" id="letter-formal">
+        <div class="card" style="margin-bottom:16px">
+          <div style="margin-bottom:12px"><span class="badge badge-blue">Formal Letter Format</span></div>
+          <div class="letter-format">
+            <div class="lf-label">SENDER'S ADDRESS</div>
+            123, Green Valley Road,<br>
+            Udaipur, Tripura - 799001<br><br>
+            <div class="lf-label">DATE</div>
+            25th March, 2026<br><br>
+            <div class="lf-label">RECEIVER'S ADDRESS</div>
+            The Principal,<br>
+            [Name of School],<br>
+            [City, State]<br><br>
+            <div class="lf-label">SUBJECT</div>
+            Subject: Application for Leave of Absence<br><br>
+            <div class="lf-label">SALUTATION</div>
+            Respected Sir/Madam,<br><br>
+            <div class="lf-label">BODY</div>
+            I am writing to respectfully request a leave of absence from school for three days, from 27th to 29th March, 2026. I need to attend a family function in another city that requires my presence.<br><br>
+            I assure you that I will complete all missed assignments upon my return. Kindly grant me the requested leave.<br><br>
+            <div class="lf-label">CLOSING</div>
+            Yours obediently,<br>
+            [Your Full Name]<br>
+            Class IX, Section A<br>
+            Roll No: [XX]
+          </div>
+        </div>
+
+        <div class="writing-card">
+          <div style="margin-bottom:8px"><span class="badge badge-gold">Sample</span> <span class="badge badge-hard">Complaint Letter</span></div>
+          <h3>Letter to Municipality About Broken Road</h3>
+          <div class="letter-format">
+            45, Main Street,<br>
+            Agartala, Tripura - 799001<br>
+            25th March, 2026<br><br>
+            The Municipal Officer,<br>
+            Agartala Municipal Council,<br>
+            Agartala.<br><br>
+            Subject: Complaint Regarding Deteriorating Road Condition in Ward No. 5<br><br>
+            Respected Sir/Madam,<br><br>
+            I am a resident of Ward No. 5 and am writing to draw your kind attention to the severely deteriorated condition of the main road in our locality. For the past three months, large potholes have made the road nearly impassable, causing accidents and damage to vehicles on a daily basis.<br><br>
+            Despite previous complaints by local residents, no repair work has been undertaken. I humbly request your office to inspect the road at your earliest convenience and initiate immediate repair work to prevent further inconvenience and risk to public safety.<br><br>
+            I trust that your office will treat this matter with the urgency it deserves.<br><br>
+            Yours faithfully,<br>
+            [Name]
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="letter-informal">
+        <div class="writing-card">
+          <div style="margin-bottom:8px"><span class="badge badge-easy">Informal Letter</span> <span class="badge badge-gold">To a Friend</span></div>
+          <h3>Letter to a Friend About Your New School</h3>
+          <div class="letter-format">
+            45, Rabindra Nagar,<br>
+            Udaipur, Tripura<br>
+            25th March, 2026<br><br>
+            Dear Rahul,<br><br>
+            How are you? I hope you and your family are doing well. It has been almost two months since I shifted here, and I thought it was high time I wrote to you!<br><br>
+            My new school is quite different from our old one. The classrooms are larger, the library is huge, and we even have a computer lab with the latest systems. My teachers are strict but very knowledgeable — especially my English teacher, who makes every class feel like an adventure.<br><br>
+            I have also made a few new friends, though I must confess I still miss the fun we used to have together. Do you remember that rainy afternoon when we hid under the peepal tree and finished our lunch early? Those memories still make me smile.<br><br>
+            Write back soon and tell me everything about what's happening back home. I eagerly await your reply!<br><br>
+            Your friend,<br>
+            [Name]
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="letter-tips">
+        <div class="grid2">
+          <div class="card">
+            <div style="font-weight:700;color:var(--accent-green);margin-bottom:10px">✅ DO's</div>
+            <div class="example-box" style="margin:0;line-height:2;font-size:13px">
+              Use proper format with date & address<br>
+              Keep subject line clear and specific<br>
+              Use formal/polite language<br>
+              One paragraph per main idea<br>
+              End with appropriate closing<br>
+              Proofread for spelling & grammar
+            </div>
+          </div>
+          <div class="card">
+            <div style="font-weight:700;color:var(--accent-red);margin-bottom:10px">❌ DON'Ts</div>
+            <div class="example-box" style="margin:0;line-height:2;font-size:13px">
+              Don't use slang in formal letters<br>
+              Don't write overly long paragraphs<br>
+              Don't forget subject line in formal<br>
+              Don't mix formal/informal tone<br>
+              Don't forget signature<br>
+              Don't use "I" to start first sentence
+            </div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <h3 style="font-size:15px;font-weight:700;margin-bottom:12px">📚 Useful Phrases Bank</h3>
+          <table class="idiom-table">
+            <tr><th>Purpose</th><th>Formal</th><th>Informal</th></tr>
+            <tr><td>Opening</td><td>I am writing with reference to...</td><td>How are you? Hope you're doing great!</td></tr>
+            <tr><td>Requesting</td><td>I would be grateful if you could...</td><td>Could you please help me with...?</td></tr>
+            <tr><td>Apologizing</td><td>I sincerely apologize for any inconvenience...</td><td>I'm really sorry about...</td></tr>
+            <tr><td>Closing</td><td>I look forward to your prompt response.</td><td>Can't wait to hear from you!</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== EMAIL ====== -->
+    <div class="section" id="sec-email">
+      <div class="page-title">Email Writing</div>
+      <div class="page-sub">From job applications to professional follow-ups — learn to write emails that get responses and make great impressions.</div>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(this,'email-structure')">Structure & Tips</button>
+        <button class="tab-btn" onclick="switchTab(this,'email-samples')">Sample Emails</button>
+        <button class="tab-btn" onclick="switchTab(this,'email-phrases')">Phrases Bank</button>
+      </div>
+
+      <div class="tab-content active" id="email-structure">
+        <div class="writing-card">
+          <h3>📧 Anatomy of a Professional Email</h3>
+          <div class="structure-box">
+            TO: recipient@email.com<br>
+            CC: (for additional informed parties)<br>
+            BCC: (for hidden recipients)<br>
+            SUBJECT: Clear, specific, action-oriented (max 8-10 words)<br>
+            ─────────────────────────────<br>
+            GREETING: Dear [Name] / Hello [Name] / Good morning,<br>
+            OPENING LINE: State your purpose immediately<br>
+            BODY: Supporting details (2-3 short paragraphs)<br>
+            CALL TO ACTION: What do you need the reader to do?<br>
+            CLOSING: Thank you · Regards · Best wishes<br>
+            SIGNATURE: Full Name | Title | Phone | Organisation
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <h3 style="font-size:15px;font-weight:700;margin-bottom:12px">🎯 10 Powerful Subject Line Examples</h3>
+          <div class="example-box" style="line-height:2.2;font-size:13px">
+            1. "Application for Science Teacher Position — 5 Years Experience"<br>
+            2. "Follow-up: Meeting Request — Wednesday 10 AM"<br>
+            3. "Feedback on [Project Name] — Action Required"<br>
+            4. "Quick Question About Your Recent Article on AI"<br>
+            5. "Complaint: Order #4521 Not Received After 2 Weeks"<br>
+            6. "Proposal: Collaboration on Student Outreach Program"<br>
+            7. "Thank You — Interview for Marketing Manager Role"<br>
+            8. "Resignation from [Position] — Effective 15th April"<br>
+            9. "Request for Meeting: Q1 Performance Review"<br>
+            10. "Introduction: New Partnership Opportunity"
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="email-samples">
+        <div class="writing-card">
+          <div style="margin-bottom:8px"><span class="badge badge-gold">Sample Email</span> <span class="badge badge-blue">Job Application</span></div>
+          <h3>Formal Job Application Email</h3>
+          <div class="letter-format">
+            <strong>To:</strong> hr@company.com<br>
+            <strong>Subject:</strong> Application for English Teacher Position — Class 9-12<br><br>
+            Dear Hiring Manager,<br><br>
+            I am writing to express my strong interest in the English Teacher position at your institution, as advertised on your website. I hold a Master's degree in English Literature from Tripura University and have three years of experience teaching senior secondary students.<br><br>
+            During my tenure at my previous institution, I developed innovative lesson plans that improved student engagement by 40% and consistently achieved excellent board examination results. I am particularly passionate about creative writing and grammar, and I believe in making English accessible and enjoyable for every learner.<br><br>
+            I have attached my resume and teaching portfolio for your consideration. I would welcome the opportunity to discuss how my skills align with your institution's vision.<br><br>
+            Thank you for your time. I look forward to hearing from you.<br><br>
+            Sincerely,<br>
+            [Your Name]<br>
+            [Phone Number] | [Email]
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="email-phrases">
+        <div class="card">
+          <h3 style="font-size:15px;font-weight:700;margin-bottom:12px">💬 Email Phrases Bank</h3>
+          <table class="idiom-table">
+            <tr><th>Purpose</th><th>Professional Phrases</th></tr>
+            <tr><td>Opening</td><td>I hope this email finds you well. · I am writing to... · Further to our conversation...</td></tr>
+            <tr><td>Requesting</td><td>I would appreciate it if... · Could you kindly... · I would be grateful if...</td></tr>
+            <tr><td>Attaching</td><td>Please find attached... · I have enclosed... · Kindly refer to the attached document.</td></tr>
+            <tr><td>Apologizing</td><td>I sincerely apologize for... · Please accept my apologies for... · I regret any inconvenience caused.</td></tr>
+            <tr><td>Following Up</td><td>I am writing to follow up on... · Just checking in regarding... · I wanted to circle back on...</td></tr>
+            <tr><td>Closing</td><td>I look forward to your response. · Please do not hesitate to contact me. · Thank you for your time and consideration.</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== SPOKEN ENGLISH ====== -->
+    <div class="section" id="sec-spoken">
+      <div class="page-title">Spoken English</div>
+      <div class="page-sub">Build confidence and fluency. Learn natural conversation patterns, pronunciation tips, and the phrases that make you sound like a native speaker.</div>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(this,'spoken-scripts')">Conversation Scripts</button>
+        <button class="tab-btn" onclick="switchTab(this,'spoken-pronunciation')">Pronunciation Guide</button>
+        <button class="tab-btn" onclick="switchTab(this,'spoken-mispronounced')">Mispronounced Words</button>
+      </div>
+
+      <div class="tab-content active" id="spoken-scripts">
+        <div class="convo-card">
+          <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:12px">🎭 Script 1: Job Interview</div>
+          <div class="bubble a"><div class="bubble-label">Interviewer</div>Good morning! Please take a seat. Tell me a little about yourself.</div>
+          <div class="bubble b"><div class="bubble-label">You</div>Good morning, sir. Thank you for this opportunity. I'm Iftakhar, currently in Class 12, specializing in Science. I have a keen interest in Artificial Intelligence and have been developing Python projects for the past year. I'm organized, hardworking, and always eager to learn.</div>
+          <div class="bubble a"><div class="bubble-label">Interviewer</div>That's impressive! What's your greatest strength?</div>
+          <div class="bubble b"><div class="bubble-label">You</div>I would say my ability to break down complex problems into simple steps. I believe good problem-solving is built on clear thinking, which is something I work on every day through coding and mathematics.</div>
+          <div class="bubble a"><div class="bubble-label">Interviewer</div>And what about weaknesses?</div>
+          <div class="bubble b"><div class="bubble-label">You</div>Honestly, I sometimes overthink before starting a task. But I've been actively working on this — I now set small deadlines for myself, which helps me get started without overthinking.</div>
+        </div>
+
+        <div class="convo-card">
+          <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:12px">🛒 Script 2: Shopping / Daily Life</div>
+          <div class="bubble a"><div class="bubble-label">Shopkeeper</div>Hello! How can I help you today?</div>
+          <div class="bubble b"><div class="bubble-label">You</div>Hi! I'm looking for a notebook — something with at least 200 pages, preferably hardcover.</div>
+          <div class="bubble a"><div class="bubble-label">Shopkeeper</div>We have a few options. This one is ₹60, and the premium one is ₹120 with a better quality cover.</div>
+          <div class="bubble b"><div class="bubble-label">You</div>Could I take a look at the premium one? I'd like to check the paper quality as well.</div>
+          <div class="bubble a"><div class="bubble-label">Shopkeeper</div>Of course! Here you go. It's 90 GSM paper, very smooth for writing.</div>
+          <div class="bubble b"><div class="bubble-label">You</div>That's great. I'll take two of these, please. Do you accept UPI payments?</div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="spoken-pronunciation">
+        <div class="card" style="margin-bottom:16px">
+          <h3 style="font-size:15px;font-weight:700;margin-bottom:12px">🔇 Silent Letters — Never Get Caught Off Guard</h3>
+          <table class="idiom-table">
+            <tr><th>Word</th><th>Silent Letter</th><th>Pronunciation</th></tr>
+            <tr><td>Knight</td><td>K, GH</td><td>/naɪt/</td></tr>
+            <tr><td>Pneumonia</td><td>P</td><td>/njuːˈmoʊniə/</td></tr>
+            <tr><td>Psychology</td><td>P</td><td>/saɪˈkɒlədʒi/</td></tr>
+            <tr><td>Wednesday</td><td>D</td><td>/ˈwɛnzdeɪ/</td></tr>
+            <tr><td>Debt</td><td>B</td><td>/dɛt/</td></tr>
+            <tr><td>Receipt</td><td>P</td><td>/rɪˈsiːt/</td></tr>
+            <tr><td>Scissors</td><td>C</td><td>/ˈsɪzərz/</td></tr>
+            <tr><td>Doubt</td><td>B</td><td>/daʊt/</td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <h3 style="font-size:15px;font-weight:700;margin-bottom:12px">👅 Tongue Twisters for Fluency</h3>
+          <div class="example-box" style="line-height:2.5;font-size:14px;font-style:italic">
+            "She sells seashells by the seashore."<br>
+            "How much wood would a woodchuck chuck if a woodchuck could chuck wood?"<br>
+            "Red lorry, yellow lorry."<br>
+            "Unique New York, you know you need unique New York."<br>
+            "The sixth sick sheik's sixth sheep's sick."
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="spoken-mispronounced">
+        <div class="card">
+          <h3 style="font-size:15px;font-weight:700;margin-bottom:12px">🇮🇳 50 Words Indians Commonly Mispronounce</h3>
+          <table class="idiom-table">
+            <tr><th>Word</th><th>❌ Common Error</th><th>✅ Correct</th><th>Tip</th></tr>
+            <tr><td>Vegetable</td><td>VEJ-it-a-bul</td><td>VEJ-ta-bul</td><td>3 syllables, not 4</td></tr>
+            <tr><td>Colonel</td><td>co-lo-nel</td><td>KUR-nel</td><td>Spelled one way, said another</td></tr>
+            <tr><td>Comfortable</td><td>com-FOR-ta-bul</td><td>CUMF-ta-bul</td><td>Reduce middle syllables</td></tr>
+            <tr><td>February</td><td>Feb-u-ary</td><td>FEB-roo-eri</td><td>Don't drop the 'r'</td></tr>
+            <tr><td>Interesting</td><td>in-ter-ES-ting</td><td>IN-tres-ting</td><td>Stress on first syllable</td></tr>
+            <tr><td>Pronunciation</td><td>pro-NOUN-ciation</td><td>pro-NUN-ciation</td><td>Not NOUN but NUN</td></tr>
+            <tr><td>Epitome</td><td>epi-TOME</td><td>eh-PIT-uh-mee</td><td>4 syllables</td></tr>
+            <tr><td>Hierarchy</td><td>hi-RARK-ee</td><td>HY-er-ar-kee</td><td>4 syllables</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== VOCABULARY ====== -->
+    <div class="section" id="sec-vocab">
+      <div class="page-title">Vocabulary Builder</div>
+      <div class="page-sub">A rich vocabulary is your passport to fluent English. Learn words in context, with examples — not just definitions.</div>
+
+      <!-- Word of the Day -->
+      <div class="wotd">
+        <div class="wotd-label">✨ Word of the Day</div>
+        <div class="wotd-word" id="wotd-word">Perseverance</div>
+        <div class="wotd-phonetic">/ˌpɜːrsɪˈvɪərəns/ · noun</div>
+        <div class="wotd-meaning" id="wotd-meaning">Continued effort to do or achieve something despite difficulty, failure, or opposition; steadfast persistence.</div>
+        <div class="wotd-example" id="wotd-example">"Her perseverance through years of struggle finally led to remarkable success."</div>
+        <button class="btn btn-gold btn-sm" style="margin-top:14px" onclick="nextWord()">Next Word →</button>
+      </div>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(this,'vocab-flash')">Flashcards</button>
+        <button class="tab-btn" onclick="switchTab(this,'vocab-themes')">Theme Lists</button>
+        <button class="tab-btn" onclick="switchTab(this,'vocab-roots')">Roots & Affixes</button>
+        <button class="tab-btn" onclick="switchTab(this,'vocab-subs')">One-Word Substitutions</button>
+      </div>
+
+      <div class="tab-content active" id="vocab-flash">
+        <div class="grid3" id="flashcard-container"></div>
+      </div>
+
+      <div class="tab-content" id="vocab-themes">
+        <div class="grid2">
+          <div class="card">
+            <div style="font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:10px">🌿 NATURE</div>
+            <div class="example-box" style="margin:0;font-size:13px;line-height:2">Verdant (lush green) · Ephemeral (short-lived) · Pristine (pure, untouched) · Serene (calm, peaceful) · Wilderness (wild natural area) · Cascade (waterfall) · Canopy (tree covering) · Fauna (animal life)</div>
+          </div>
+          <div class="card">
+            <div style="font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:10px">💼 BUSINESS</div>
+            <div class="example-box" style="margin:0;font-size:13px;line-height:2">Entrepreneur · Leverage · Stakeholder · Revenue · Synergy · Acquisition · Benchmark · Fiscal · Outsource · Innovation · Scalable · Monetize</div>
+          </div>
+          <div class="card">
+            <div style="font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:10px">💭 EMOTIONS</div>
+            <div class="example-box" style="margin:0;font-size:13px;line-height:2">Melancholy (deep sadness) · Euphoria (intense happiness) · Nostalgia (longing for the past) · Apprehension (anxiety) · Elated (very happy) · Despondent (hopeless) · Serene (calm)</div>
+          </div>
+          <div class="card">
+            <div style="font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:10px">🔬 SCIENCE & TECH</div>
+            <div class="example-box" style="margin:0;font-size:13px;line-height:2">Algorithm · Neural network · Hypothesis · Empirical · Synthesis · Catalyst · Quantum · Genome · Prototype · Simulation · Nanotechnology</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="vocab-roots">
+        <div class="card">
+          <h3 style="font-size:15px;font-weight:700;margin-bottom:12px">🌱 Root Words, Prefixes & Suffixes</h3>
+          <table class="idiom-table">
+            <tr><th>Root/Affix</th><th>Meaning</th><th>Example Words</th></tr>
+            <tr><td>bio-</td><td>life</td><td>biology, biography, biodiversity</td></tr>
+            <tr><td>micro-</td><td>small</td><td>microscope, microorganism, microchip</td></tr>
+            <tr><td>phon-</td><td>sound</td><td>telephone, phonetic, microphone</td></tr>
+            <tr><td>geo-</td><td>earth</td><td>geography, geology, geometry</td></tr>
+            <tr><td>-logy</td><td>study of</td><td>psychology, sociology, technology</td></tr>
+            <tr><td>-ist</td><td>one who</td><td>scientist, artist, journalist</td></tr>
+            <tr><td>un-</td><td>not/reverse</td><td>unhappy, undo, unfair</td></tr>
+            <tr><td>re-</td><td>again</td><td>rewrite, rebuild, reconsider</td></tr>
+            <tr><td>-tion</td><td>act/process</td><td>education, communication, motivation</td></tr>
+            <tr><td>pre-</td><td>before</td><td>preview, predict, prejudge</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-content" id="vocab-subs">
+        <div class="card">
+          <h3 style="font-size:15px;font-weight:700;margin-bottom:12px">🎯 One-Word Substitutions (Top 50)</h3>
+          <table class="idiom-table">
+            <tr><th>Phrase</th><th>One Word</th></tr>
+            <tr><td>One who cannot die</td><td>Immortal</td></tr>
+            <tr><td>Fear of water</td><td>Hydrophobia</td></tr>
+            <tr><td>One who is present everywhere</td><td>Omnipresent</td></tr>
+            <tr><td>Story of someone's life written by themselves</td><td>Autobiography</td></tr>
+            <tr><td>Science dealing with the study of insects</td><td>Entomology</td></tr>
+            <tr><td>A doctor who treats children</td><td>Paediatrician</td></tr>
+            <tr><td>One who walks in sleep</td><td>Somnambulust</td></tr>
+            <tr><td>One who loves books</td><td>Bibliophile</td></tr>
+            <tr><td>A place where birds are kept</td><td>Aviary</td></tr>
+            <tr><td>Unable to read or write</td><td>Illiterate</td></tr>
+            <tr><td>A person who travels to a sacred place</td><td>Pilgrim</td></tr>
+            <tr><td>One who kills animals for food</td><td>Butcher</td></tr>
+            <tr><td>A group of fish</td><td>Shoal / School</td></tr>
+            <tr><td>To officially take away someone's property</td><td>Confiscate</td></tr>
+            <tr><td>Words written on a tomb</td><td>Epitaph</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== EXAM ====== -->
+    <div class="section" id="sec-exam">
+      <div class="page-title">Test Yourself</div>
+      <div class="page-sub">Put your knowledge to the test! Real exam-style questions with instant scoring and detailed feedback.</div>
+
+      <div id="exam-select">
+        <div class="grid3" style="margin-bottom:24px">
+          <div class="card" style="text-align:center;cursor:pointer" onclick="startExam('grammar')">
+            <div style="font-size:32px;margin-bottom:10px">📖</div>
+            <div style="font-weight:700;color:var(--text);margin-bottom:4px">Grammar Test</div>
+            <div style="font-size:12px;color:var(--text-dim);margin-bottom:12px">15 Questions · 20 min · All topics</div>
+            <span class="badge badge-med">Medium</span>
+          </div>
+          <div class="card" style="text-align:center;cursor:pointer" onclick="startExam('vocab')">
+            <div style="font-size:32px;margin-bottom:10px">📚</div>
+            <div style="font-weight:700;color:var(--text);margin-bottom:4px">Vocabulary Test</div>
+            <div style="font-size:12px;color:var(--text-dim);margin-bottom:12px">10 Questions · 15 min · Synonyms/Antonyms</div>
+            <span class="badge badge-easy">Easy</span>
+          </div>
+          <div class="card" style="text-align:center;cursor:pointer" onclick="startExam('comprehensive')">
+            <div style="font-size:32px;margin-bottom:10px">🏆</div>
+            <div style="font-weight:700;color:var(--text);margin-bottom:4px">Full Mock Test</div>
+            <div style="font-size:12px;color:var(--text-dim);margin-bottom:12px">20 Questions · 30 min · All sections</div>
+            <span class="badge badge-hard">Hard</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="exam-active" style="display:none">
+        <div class="timer" id="exam-timer">⏱️ Time Remaining: <span id="timer-display">20:00</span></div>
+        <div id="exam-questions"></div>
+        <button class="btn btn-gold" style="margin-top:16px" onclick="submitExam()">Submit Test →</button>
+      </div>
+
+      <div id="exam-result" style="display:none">
+        <div class="score-card">
+          <div class="score-big" id="final-score">0/0</div>
+          <div class="score-label" id="final-msg">Great effort! Keep practicing.</div>
+        </div>
+        <button class="btn btn-gold" onclick="retakeExam()">Retake Test</button>
+        <button class="btn btn-outline" style="margin-left:10px" onclick="showSection('exam')">Choose Another Test</button>
+      </div>
+    </div>
+
+    <!-- ====== PROGRESS ====== -->
+    <div class="section" id="sec-progress">
+      <div class="page-title">My Progress</div>
+      <div class="page-sub">Track your journey from Beginner to Elite. Every XP point you earn is a step toward mastery.</div>
+
+      <div class="grid3" style="margin-bottom:24px">
+        <div class="card" style="text-align:center">
+          <div style="font-size:36px;font-family:'Playfair Display',serif;color:var(--gold-light);font-weight:900" id="prog-xp">0</div>
+          <div style="font-size:12px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-top:4px">Total XP Earned</div>
+        </div>
+        <div class="card" style="text-align:center">
+          <div style="font-size:36px;font-family:'Playfair Display',serif;color:var(--accent-green);font-weight:900" id="prog-streak">0</div>
+          <div style="font-size:12px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-top:4px">Day Streak 🔥</div>
+        </div>
+        <div class="card" style="text-align:center">
+          <div style="font-size:36px;font-family:'Playfair Display',serif;color:var(--accent-purple);font-weight:900" id="prog-lessons">0</div>
+          <div style="font-size:12px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-top:4px">Lessons Completed</div>
+        </div>
+      </div>
+
+      <div class="section-divider"><h2>🏅 Badge Collection</h2><div class="divider-line"></div></div>
+      <div class="badge-grid">
+        <div class="badge-item earned"><div class="badge-emoji">🌱</div><div class="badge-name">Beginner</div></div>
+        <div class="badge-item" id="badge-explorer"><div class="badge-emoji">🧭</div><div class="badge-name">Explorer</div></div>
+        <div class="badge-item" id="badge-scholar"><div class="badge-emoji">📜</div><div class="badge-name">Scholar</div></div>
+        <div class="badge-item" id="badge-master"><div class="badge-emoji">🎓</div><div class="badge-name">Master</div></div>
+        <div class="badge-item" id="badge-elite"><div class="badge-emoji">👑</div><div class="badge-name">Elite</div></div>
+      </div>
+
+      <div class="section-divider"><h2>🏆 Weekly Leaderboard</h2><div class="divider-line"></div></div>
+      <div id="leaderboard">
+        <div class="lb-item"><div class="lb-rank gold-r">1</div><div class="lb-name">Priya Sharma</div><div class="lb-xp">2,450 XP</div></div>
+        <div class="lb-item"><div class="lb-rank silver-r">2</div><div class="lb-name">Arjun Mehta</div><div class="lb-xp">2,190 XP</div></div>
+        <div class="lb-item"><div class="lb-rank bronze-r">3</div><div class="lb-name">Rohan Das</div><div class="lb-xp">1,870 XP</div></div>
+        <div class="lb-item"><div class="lb-rank other-r">4</div><div class="lb-name">Anika Roy</div><div class="lb-xp">1,640 XP</div></div>
+        <div class="lb-item" id="your-lb-entry" style="border-color:rgba(212,160,23,.3);background:rgba(212,160,23,.04)"><div class="lb-rank" style="background:rgba(212,160,23,.2);color:var(--gold)">—</div><div class="lb-name" id="lb-your-name">You</div><div class="lb-xp" id="lb-your-xp">0 XP</div></div>
+      </div>
+
+      <div class="section-divider"><h2>🎓 Certificate of Completion</h2><div class="divider-line"></div></div>
+      <div class="cert">
+        <div class="cert-title">EnglishApex Academy</div>
+        <div class="cert-divider"></div>
+        <div class="cert-main">Certificate of Excellence</div>
+        <div style="font-size:13px;color:var(--text-dim);margin:4px 0">This is to proudly certify that</div>
+        <div class="cert-name" id="cert-name">Student</div>
+        <div class="cert-body">has demonstrated exceptional dedication, consistency, and mastery in the English Language Program at EnglishApex Academy.</div>
+        <div class="cert-seal">🏅</div>
+        <div style="font-size:12px;color:var(--text-dim)">Issued by EnglishApex · March 2026</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ========== STATE ==========
+let state = {
+  name: '',
+  xp: 0,
+  streak: 1,
+  lessons: 0,
+  currentExam: null,
+  examAnswers: {},
+  timerInterval: null,
+  timeLeft: 0
+};
+
+function loadState() {
+  try {
+    const s = localStorage.getItem('englishApex');
+    if (s) state = {...state, ...JSON.parse(s)};
+  } catch(e) {}
+  updateAllUI();
+}
+
+function saveState() {
+  try { localStorage.setItem('englishApex', JSON.stringify(state)); } catch(e) {}
+}
+
+function updateAllUI() {
+  document.getElementById('top-streak').textContent = state.streak;
+  document.getElementById('top-xp').textContent = state.xp;
+  document.getElementById('sb-streak').textContent = state.streak;
+  document.getElementById('sb-xp').textContent = state.xp + ' / 500';
+  document.getElementById('sb-xp-fill').style.width = Math.min((state.xp % 500)/500*100, 100) + '%';
+  document.getElementById('stat-lessons').textContent = state.lessons;
+  document.getElementById('stat-streak').textContent = state.streak;
+  document.getElementById('stat-xp').textContent = state.xp;
+  document.getElementById('prog-xp').textContent = state.xp;
+  document.getElementById('prog-streak').textContent = state.streak;
+  document.getElementById('prog-lessons').textContent = state.lessons;
+  document.getElementById('lb-your-xp').textContent = state.xp + ' XP';
+  if (state.name) {
+    document.getElementById('hero-name').textContent = 'Welcome back, ' + state.name + '!';
+    document.getElementById('cert-name').textContent = state.name;
+    document.getElementById('lb-your-name').textContent = state.name;
+    document.getElementById('avatar-icon').textContent = state.name[0].toUpperCase();
+    document.getElementById('student-name').value = state.name;
+  }
+  // Badges
+  const badge = getBadge();
+  document.getElementById('stat-badge').textContent = badge.emoji;
+  updateBadges();
+}
+
+function getBadge() {
+  if (state.xp >= 5000) return {emoji:'👑',name:'Elite'};
+  if (state.xp >= 2000) return {emoji:'🎓',name:'Master'};
+  if (state.xp >= 800) return {emoji:'📜',name:'Scholar'};
+  if (state.xp >= 200) return {emoji:'🧭',name:'Explorer'};
+  return {emoji:'🌱',name:'Beginner'};
+}
+
+function updateBadges() {
+  const ids = ['badge-explorer','badge-scholar','badge-master','badge-elite'];
+  const thresholds = [200, 800, 2000, 5000];
+  ids.forEach((id,i) => {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('earned', state.xp >= thresholds[i]);
+  });
+}
+
+function awardXP(amount) {
+  state.xp += amount;
+  state.lessons++;
+  saveState();
+  updateAllUI();
+  showXPToast(amount);
+}
+
+function showXPToast(amount) {
+  const t = document.createElement('div');
+  t.style.cssText = 'position:fixed;top:80px;right:20px;background:linear-gradient(135deg,#D4A017,#b8860b);color:#000;padding:10px 18px;border-radius:20px;font-weight:700;font-size:14px;z-index:9999;animation:fadeSlide .3s ease;box-shadow:0 4px 16px rgba(212,160,23,.4)';
+  t.textContent = '+' + amount + ' XP ⚡';
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2000);
+}
+
+// ========== NAVIGATION ==========
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.getAttribute('onclick') && n.getAttribute('onclick').includes("'" + id + "'")) n.classList.add('active');
+  });
+  closeSidebar();
+  if (id !== 'home') awardXP(10);
+}
+
+// ========== SIDEBAR ==========
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+
+// ========== GRAMMAR ACCORDION ==========
+function toggleGrammar(header) {
+  const body = header.nextElementSibling;
+  const chev = header.querySelector('.chevron');
+  const isOpen = body.classList.contains('open');
+  document.querySelectorAll('.grammar-body').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.chevron').forEach(c => c.textContent = '+');
+  if (!isOpen) {
+    body.classList.add('open');
+    chev.textContent = '−';
+    awardXP(20);
+  }
+}
+
+// ========== TABS ==========
+function switchTab(btn, contentId) {
+  const parent = btn.closest('.section') || btn.closest('.grammar-body') || document;
+  parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  parent.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  const target = document.getElementById(contentId);
+  if (target) target.classList.add('active');
+}
+
+// ========== DPP ==========
+function toggleAnswer(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('visible');
+  const btn = el.previousElementSibling;
+  if (el.classList.contains('visible')) { awardXP(30); }
+}
+
+function selectOpt(el, correct, qid) {
+  const parent = el.closest('.q-options');
+  parent.querySelectorAll('.q-opt').forEach(o => o.classList.remove('correct','wrong'));
+  if (correct === 'a') { el.classList.add('correct'); awardXP(10); }
+  else el.classList.add('wrong');
+}
+
+// ========== EXAM ==========
+const examData = {
+  grammar: [
+    {q:"Which sentence uses the correct tense?", opts:["I am knowing the answer.","I know the answer.","I am know the answer.","I knows the answer."], ans:1},
+    {q:"Identify the error: 'She don't like coffee.'", opts:["She","don't","like","coffee"], ans:1},
+    {q:"Convert to passive: 'The teacher corrects the homework.'", opts:["The homework has been corrected.","The homework is corrected by the teacher.","The homework corrects by teacher.","The homework was correcting."], ans:1},
+    {q:"'If I were you, I would study harder.' This is a Type ___ conditional.", opts:["0","1","2","3"], ans:2},
+    {q:"Choose the correct article: '___ honest man is trusted by all.'", opts:["A","An","The","No article"], ans:1}
+  ],
+  vocab: [
+    {q:"What is the synonym of 'Abundant'?", opts:["Scarce","Plentiful","Rare","Limited"], ans:1},
+    {q:"What is the antonym of 'Benevolent'?", opts:["Kind","Generous","Malevolent","Helpful"], ans:2},
+    {q:"'Ephemeral' means:", opts:["Long-lasting","Extremely difficult","Short-lived","Very beautiful"], ans:2},
+    {q:"One word for 'Fear of heights' is:", opts:["Claustrophobia","Acrophobia","Hydrophobia","Agoraphobia"], ans:1},
+    {q:"'Philology' is the study of:", opts:["Animals","Language and literature","Rocks","Stars"], ans:1}
+  ],
+  comprehensive: [
+    {q:"Which of the following is a correlative conjunction?", opts:["And","But","Either...or","Because"], ans:2},
+    {q:"'The girl whose bag was stolen cried.' Identify the clause type.", opts:["Noun clause","Adverb clause","Adjective clause","Independent clause"], ans:2},
+    {q:"Choose correct: 'He is ___ honest man.'", opts:["a","an","the","no article"], ans:1},
+    {q:"Passive of 'She will write a letter':", opts:["A letter will written by her.","A letter will be written by her.","A letter is written by her.","A letter has been written."], ans:1},
+    {q:"'Melancholy' is closest in meaning to:", opts:["Joy","Deep sadness","Anger","Surprise"], ans:1}
+  ]
+};
+
+let currentExamType = '';
+let examTimer = null;
+let timeLeft = 0;
+
+function startExam(type) {
+  currentExamType = type;
+  const questions = examData[type];
+  document.getElementById('exam-select').style.display = 'none';
+  document.getElementById('exam-active').style.display = 'block';
+  document.getElementById('exam-result').style.display = 'none';
+  
+  const qContainer = document.getElementById('exam-questions');
+  qContainer.innerHTML = questions.map((q,i) => `
+    <div class="question-item" style="margin-bottom:12px">
+      <div class="q-num">Q${i+1} of ${questions.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-options">
+        ${q.opts.map((o,j) => `<div class="q-opt" onclick="examSelect(this,${i},${j})" id="eq-${i}-${j}">${String.fromCharCode(65+j)}) ${o}</div>`).join('')}
+      </div>
+    </div>
+  `).join('');
+  
+  const mins = type === 'comprehensive' ? 30 : type === 'grammar' ? 20 : 15;
+  timeLeft = mins * 60;
+  updateTimer();
+  examTimer = setInterval(() => {
+    timeLeft--;
+    updateTimer();
+    if (timeLeft <= 0) { clearInterval(examTimer); submitExam(); }
+  }, 1000);
+}
+
+const examSelections = {};
+function examSelect(el, qIndex, optIndex) {
+  examSelections[qIndex] = optIndex;
+  const parent = el.closest('.q-options');
+  parent.querySelectorAll('.q-opt').forEach(o => o.style.borderColor = '');
+  el.style.borderColor = 'var(--gold)';
+}
+
+function updateTimer() {
+  const m = Math.floor(timeLeft/60).toString().padStart(2,'0');
+  const s = (timeLeft%60).toString().padStart(2,'0');
+  document.getElementById('timer-display').textContent = m + ':' + s;
+}
+
+function submitExam() {
+  clearInterval(examTimer);
+  const questions = examData[currentExamType];
+  let correct = 0;
+  questions.forEach((q, i) => {
+    if (examSelections[i] === q.ans) correct++;
+  });
+  document.getElementById('exam-active').style.display = 'none';
+  document.getElementById('exam-result').style.display = 'block';
+  document.getElementById('final-score').textContent = correct + '/' + questions.length;
+  const pct = (correct/questions.length)*100;
+  let msg = pct >= 80 ? '🌟 Excellent! Outstanding performance!' : pct >= 60 ? '👍 Good effort! Keep practicing!' : '📚 Keep studying — you\'ll ace it next time!';
+  document.getElementById('final-msg').textContent = msg;
+  awardXP(correct * 25);
+}
+
+function retakeExam() {
+  Object.keys(examSelections).forEach(k => delete examSelections[k]);
+  startExam(currentExamType);
+}
+
+// ========== NAME ==========
+function updateName(val) { state.name = val; }
+function saveName() {
+  saveState();
+  updateAllUI();
+  showXPToast(0);
+}
+
+// ========== WORD OF THE DAY ==========
+const words = [
+  {word:'Perseverance', phon:'/ˌpɜːrsɪˈvɪərəns/ · noun', meaning:'Continued effort despite difficulty or failure.', ex:'"Her perseverance through hardship led to success."'},
+  {word:'Eloquent', phon:'/ˈɛləkwənt/ · adjective', meaning:'Fluent and persuasive in speech or writing.', ex:'"He gave an eloquent speech that moved the entire audience."'},
+  {word:'Tenacious', phon:'/tɪˈneɪʃəs/ · adjective', meaning:'Holding firmly to something; persistent and determined.', ex:'"Her tenacious spirit never allowed her to give up."'},
+  {word:'Cogent', phon:'/ˈkoʊdʒənt/ · adjective', meaning:'Clear, logical, and convincing.', ex:'"She made a cogent argument that silenced all critics."'},
+  {word:'Elucidate', phon:'/ɪˈluːsɪdeɪt/ · verb', meaning:'To make clear and explain something fully.', ex:'"The professor elucidated the complex theory with simple examples."'},
+  {word:'Intrinsic', phon:'/ɪnˈtrɪnsɪk/ · adjective', meaning:'Belonging naturally; essential and fundamental.', ex:'"Reading has intrinsic value beyond just exam performance."'},
+];
+let wordIndex = 0;
+function nextWord() {
+  wordIndex = (wordIndex + 1) % words.length;
+  const w = words[wordIndex];
+  document.getElementById('wotd-word').textContent = w.word;
+  document.getElementById('wotd-meaning').textContent = w.meaning;
+  document.getElementById('wotd-example').textContent = w.ex;
+  awardXP(5);
+}
+
+// ========== FLASHCARDS ==========
+const flashWords = [
+  {word:'Ambiguous', type:'adjective', meaning:'Open to more than one interpretation; unclear', ex:'"The ambiguous instructions confused the students."'},
+  {word:'Benevolent', type:'adjective', meaning:'Well-meaning and kind; generous', ex:'"The benevolent teacher stayed late to help."'},
+  {word:'Concise', type:'adjective', meaning:'Giving a lot of information clearly in few words', ex:'"Write a concise summary of the chapter."'},
+  {word:'Diligent', type:'adjective', meaning:'Having steady effort in work or duties', ex:'"A diligent student always reviews notes daily."'},
+  {word:'Empathy', type:'noun', meaning:'The ability to understand another\'s feelings', ex:'"Good leaders show empathy toward their team."'},
+  {word:'Formidable', type:'adjective', meaning:'Inspiring fear or respect through strength', ex:'"She was a formidable opponent in the debate."'},
+];
+
+function renderFlashcards() {
+  const container = document.getElementById('flashcard-container');
+  if (!container) return;
+  container.innerHTML = flashWords.map((w,i) => `
+    <div class="flashcard" onclick="this.classList.toggle('flipped');window.apexXP&&apexXP(5)">
+      <div class="flashcard-inner">
+        <div class="fc-front">
+          <div class="fc-word">${w.word}</div>
+          <div class="fc-hint">${w.type} · Click to reveal</div>
+        </div>
+        <div class="fc-back">
+          <div class="fc-meaning">${w.meaning}</div>
+          <div class="fc-hint" style="font-style:italic;margin-top:4px">${w.ex}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+window.apexXP = awardXP;
+
+// ========== CHECKLIST ==========
+function renderChecklist() {
+  const items = [
+    "Does your story have a clear beginning, middle, and end?",
+    "Is your setting described with sensory details?",
+    "Does your main character have a clear goal or desire?",
+    "Is there a conflict or problem in the story?",
+    "Does the conflict get resolved by the end?",
+    "Have you used dialogue to reveal character?",
+    "Is there a clear moral or lesson?",
+    "Have you avoided starting too many sentences with 'I' or 'The'?",
+    "Did you vary sentence lengths (short for impact, long for detail)?",
+    "Is your ending satisfying and memorable?"
+  ];
+  const container = document.getElementById('checklist-items');
+  if (!container) return;
+  container.innerHTML = items.map((item,i) => `
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:10px;border-radius:8px;margin-bottom:6px;background:var(--bg3);cursor:pointer;transition:all .2s" onclick="toggleCheck(this,${i})">
+      <div style="width:20px;height:20px;border:2px solid var(--border);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .2s" class="chk-box"></div>
+      <div style="font-size:13px;color:var(--text-dim);line-height:1.5">${item}</div>
+    </div>
+  `).join('');
+}
+
+function toggleCheck(el, i) {
+  const box = el.querySelector('.chk-box');
+  const checked = box.style.background === 'var(--accent-green)';
+  if (!checked) { box.style.background = 'var(--accent-green)'; box.style.borderColor = 'var(--accent-green)'; box.textContent = '✓'; box.style.color = '#000'; el.style.background = 'rgba(61,214,140,.06)'; awardXP(5); }
+  else { box.style.background = ''; box.style.borderColor = 'var(--border)'; box.textContent = ''; el.style.background = 'var(--bg3)'; }
+}
+
+// ========== SEARCH ==========
+function handleSearch(val) {
+  if (!val.trim()) return;
+  const map = {
+    'tense':'grammar','tenses':'grammar','grammar':'grammar',
+    'story':'story','essay':'essay','poem':'poem',
+    'letter':'letter','email':'email','vocab':'vocab',
+    'vocabulary':'vocab','dpp':'dpp','spoken':'spoken',
+    'exam':'exam','test':'exam','progress':'progress'
+  };
+  const lower = val.toLowerCase();
+  for (const [key, sec] of Object.entries(map)) {
+    if (lower.includes(key)) { showSection(sec); break; }
+  }
+}
+
+// ========== INIT ==========
+document.addEventListener('DOMContentLoaded', () => {
+  loadState();
+  renderFlashcards();
+  renderChecklist();
+  
+  // streak logic
+  const today = new Date().toDateString();
+  const lastVisit = localStorage.getItem('lastVisit');
+  if (lastVisit !== today) {
+    state.streak = lastVisit ? state.streak + 1 : 1;
+    localStorage.setItem('lastVisit', today);
+    saveState();
+    updateAllUI();
+  }
+});
+</script>
+
+<div id="bnav">
+  <div class="bnav-inner">
+    <button onclick="showSection('home')"><span class="bi">🏠</span>Home</button>
+    <button onclick="showSection('grammar')"><span class="bi">📖</span>Grammar</button>
+    <button onclick="showSection('dpp')"><span class="bi">📝</span>DPP</button>
+    <button onclick="showSection('story')"><span class="bi">📜</span>Story</button>
+    <button onclick="showSection('essay')"><span class="bi">📄</span>Essay</button>
+    <button onclick="toggleSidebar()"><span class="bi">☰</span>More</button>
+  </div>
+</div>
+
+</body>
+</html>
